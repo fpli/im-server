@@ -22,10 +22,10 @@ import java.util.HashMap;
  */
 public class SaveMsgDao {
 
-	private static HashMap<Integer,Result> idResult = new HashMap<Integer, Result>();
-	private static HashMap<Result,Integer> resultId = new HashMap<Result, Integer>();
-	private static HashMap<Integer,TranObjectType> idTrantype = new HashMap<Integer, TranObjectType>();
-	private static HashMap<TranObjectType,Integer> trantypeId = new HashMap<TranObjectType, Integer>(); 
+	private static HashMap<Integer, Result> idResult = new HashMap<>();
+	private static HashMap<Result, Integer> resultId = new HashMap<>();
+	private static HashMap<Integer, TranObjectType> idTrantype = new HashMap<>();
+	private static HashMap<TranObjectType, Integer> trantypeId = new HashMap<>();
 	
 	static{
 		//为Result枚举添加映射
