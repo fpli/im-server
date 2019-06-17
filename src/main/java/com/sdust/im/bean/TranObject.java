@@ -4,6 +4,9 @@ import com.sdust.im.global.Result;
 
 import java.io.Serializable;
 
+/**
+ * 描述: 传输对象模型
+ */
 public class TranObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +21,7 @@ public class TranObject implements Serializable {
 
 	public TranObject(){}
 
-	public TranObject(Object object,TranObjectType tranType) {
+	public TranObject(Object object, TranObjectType tranType) {
 		this.object = object;
 		this.tranType = tranType;
 	}
