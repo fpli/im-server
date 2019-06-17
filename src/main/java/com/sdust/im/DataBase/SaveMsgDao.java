@@ -136,7 +136,7 @@ public class SaveMsgDao {
 	 * 
 	 */
 	public static ArrayList<TranObject> selectMsg(int id) {
-		ArrayList<TranObject> msgList = new ArrayList<TranObject>();
+		ArrayList<TranObject> msgList = new ArrayList<>();
 		String sq0 = "use myqq";
 		String sql1 = "select * " +
 				      "from saveMsg " +

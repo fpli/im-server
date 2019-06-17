@@ -176,7 +176,7 @@ public class UserDao {
 	}
 
 	public static ArrayList<User> selectFriendByAccountOrID(Object condition) {
-		ArrayList<User> list = new ArrayList<User>();
+		ArrayList<User> list = new ArrayList<>();
 		String sql0 = "use myqq";
 		String sql1 = "";
 		int conFlag = 0;// 默认是0 表示使用id查找 1为使用id
@@ -220,7 +220,7 @@ public class UserDao {
 	}
 
 	public static ArrayList<User> selectFriendByMix(String[] mix) {
-		ArrayList<User> list = new ArrayList<User>();
+		ArrayList<User> list = new ArrayList<>();
 		String sql0 = "use myqq";
 		String sql1 = "select * "
 				+ "from user "
