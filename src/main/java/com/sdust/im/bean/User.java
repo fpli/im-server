@@ -16,17 +16,19 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int id;
-	private String account;
-	private String userName;
-	private String password;
-	private Date birthday;
-	private int gender; // 0代表女生 1代表男生
-	private boolean isOnline;
-	private String location;
+	private int id;//用户id
+	private String account;//用户账号
+	private String userName;//用户名称
+	private String password;//用户密码
+	private Date birthday;//用户出生日期
+	private int gender; // 用户性别:0代表女生 1代表男生 2未知
+	private boolean isOnline;// 当前是否在线
+	private String location;// 用户位置
 	private byte[] photo;
-	private int age;
-	private String userBriefIntro;
+	private int age;//用户年龄
+	private String userBriefIntro;//用户个性签名
+
+	private ArrayList<User> friendList;// 用户好友列表
 
 	public String getUserBriefIntro() {
 		return userBriefIntro;
@@ -43,8 +45,6 @@ public class User implements Serializable {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-	private ArrayList<User> friendList;
 
 	public ArrayList<User> getFriendList() {
 		return friendList;

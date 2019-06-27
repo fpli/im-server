@@ -106,6 +106,7 @@ public class ClientActivity {
 			setUser(user);
 			System.out.println(user.getAccount() + "上线了");
 			tran.setResult(Result.LOGIN_SUCCESS);
+			user.setIsOnline(true);
 			mServer.addClient(user.getId(), this);
 			System.out.println("当前在线人数：" + mServer.size());
 			// 获取好友列表
