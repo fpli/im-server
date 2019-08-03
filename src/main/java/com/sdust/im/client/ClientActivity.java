@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Administrator 客户端线程
@@ -27,11 +28,11 @@ public class ClientActivity {
 	 * 每个服务器线程都同时调用此实例的socket争夺send ，
 	 * 并发控制异常。
 	 * */
-	private LinkedList<TranObject> sendQueue;
+	private LinkedBlockingQueue<TranObject> sendQueue;
 
-	private ServerListen mServer; // 服务器
-	private User user;
-	private Socket mClient; // 客户端连接
+	private ServerListen mServer;             // 服务器
+	private User user;		                  // 绑定到Socket的账户
+	private Socket mClient;                   // 客户端连接
 	private ClientListenThread mClientListen; // 客户端监听进程
 	private ClientSendThread mClientSend;     // 客户端发送进程
 	private ObjectOutputStream mOutput;
@@ -39,7 +40,7 @@ public class ClientActivity {
 
 	public ClientActivity(ServerListen mServer, Socket mClient) {
 		user = new User();
-		sendQueue = new LinkedList<>();
+		sendQueue = new LinkedBlockingQueue<>();
 		this.mServer = mServer;
 		this.mClient = mClient;
 		try {
@@ -99,7 +100,7 @@ public class ClientActivity {
 	 */
 	public void login(TranObject tran) {
 		User user = (User) tran.getObject();
-		// 验证密码和用户名是否存在，若存在则为user对象赋值
+		// 验证密码和用户名是否存在，若存在则为user对象其他属性赋值
 		boolean isExisted = UserDao.login(user);
 		if (isExisted == true) {
 			UserDao.updateIsOnline(user.getId(), 1);
@@ -107,7 +108,7 @@ public class ClientActivity {
 			System.out.println(user.getAccount() + "上线了");
 			tran.setResult(Result.LOGIN_SUCCESS);
 			user.setIsOnline(true);
-			mServer.addClient(user.getId(), this);
+			mServer.addClient(user.getId(), this);// 登录成功后完成用户到Socket的绑定
 			System.out.println("当前在线人数：" + mServer.size());
 			// 获取好友列表
 			ArrayList<User> friendList = FriendDao.getFriend(user.getId());
@@ -233,11 +234,13 @@ public class ClientActivity {
 	 */
 	public void sendFriend(TranObject tran) {
 		System.out.println("包含要发送的那个好友吗？" + tran.getReceiveId() + mServer.contatinId(tran.getReceiveId()));
-		if (mServer.contatinId(tran.getReceiveId())) {// 对方账户是否在线
+		if (mServer.contatinId(tran.getReceiveId())) {
+			// 对方账户在线,则找到对方账户绑定的ClientActivity,把消息放入他的消息队列
 			ClientActivity friendClient = mServer.getClientByID(tran.getReceiveId());
 			System.out.println("将好友请求发给好友...");
 			friendClient.insertQueue(tran);
 		} else {
+			// 对方账户不在线，则保存到数据库，等他上线后放入他的消息队列
 			SaveMsgDao.insertSaveMsg(user.getId(), tran);
 		}
 
@@ -253,15 +256,12 @@ public class ClientActivity {
 	/**
 	 * 发送数据 如果是从好友那里发送来的 就先添加到队列 并发控制，因为同步性太强 否则直接发送； 属于发送线程
 	 */
-	public synchronized void insertQueue(TranObject tran) {
+	public void insertQueue(TranObject tran) {
 		sendQueue.add(tran);
 	}
 
-	public synchronized int sizeOfQueue() {
-		return sendQueue.size();
-	}
 
-	public synchronized TranObject removeQueueEle(int i) {
-		return sendQueue.remove(i);
+	public TranObject removeQueueEle() {
+		return sendQueue.poll();
 	}
 }

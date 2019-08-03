@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 描述:聊天信息模型(发送方消息|接收方消息)
  */
-public class ChatEntity implements Serializable{
+public class ChatEntity implements Serializable {
 
 	private static final long serialVersionUID = 3149570372342194659L;
 

@@ -66,6 +66,8 @@ public class ClientListenThread implements Runnable {
 			client.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			client.close();
+			System.out.println("客户端异常关闭了连接");
 		}
 	}
 

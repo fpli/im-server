@@ -21,7 +21,7 @@ public class UserDao {
 	 * 
 	 */
 	public static boolean selectAccount(String account) {
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "select * from user where account=?";
 		Connection con = DBPool.getConnection();
 		try {
@@ -46,7 +46,7 @@ public class UserDao {
 	 * 
 	 */
 	public static int insertInfo(User user) {
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "insert into user (account,name,photo,birthday,password,gender)"
 				+ " values(?,?,?,?,?,?)";
 		Connection con = DBPool.getConnection();
@@ -85,7 +85,7 @@ public class UserDao {
 	 * 得到最后一次插入的值
 	 */
 	public static int getLastID(Connection con) {
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "select MAX(id) as ID from user";// 注意:使用MAX(ID) 必须加上 as
 														// id 翻译
 		PreparedStatement ps;
@@ -111,7 +111,7 @@ public class UserDao {
 	 */
 	public static boolean login(User user) {
 		boolean isExisted = false;
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "select * from user where account=? and password=?";
 		Connection con = DBPool.getConnection();
 		PreparedStatement ps;
@@ -145,7 +145,7 @@ public class UserDao {
 	 * 更新在线状态
 	 */
 	public static void updateIsOnline(int id, int isOnline) {
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "update user set isOnline = ? where id = ?";
 		Connection con = DBPool.getConnection();
 		try {
@@ -177,7 +177,7 @@ public class UserDao {
 
 	public static ArrayList<User> selectFriendByAccountOrID(Object condition) {
 		ArrayList<User> list = new ArrayList<>();
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "";
 		int conFlag = 0;// 默认是0 表示使用id查找 1为使用id
 		if (condition instanceof String) {
@@ -221,7 +221,7 @@ public class UserDao {
 
 	public static ArrayList<User> selectFriendByMix(String[] mix) {
 		ArrayList<User> list = new ArrayList<>();
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1 = "select * "
 				+ "from user "
 				+ "where ((YEAR(CURDATE())-YEAR(birthday))-(RIGHT(CURDATE(),5)<RIGHT(birthday,5))) "

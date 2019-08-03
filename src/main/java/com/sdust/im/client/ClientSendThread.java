@@ -2,8 +2,10 @@ package com.sdust.im.client;
 
 import com.sdust.im.bean.TranObject;
 
-import java.util.concurrent.TimeUnit;
 
+/**
+ * 描述:消息发送线程
+ */
 public class ClientSendThread implements Runnable {
 
 	private ClientActivity mClient;
@@ -17,17 +19,11 @@ public class ClientSendThread implements Runnable {
 	@Override
 	public void run() {
 		while (isRunning) {
-			if (mClient.sizeOfQueue() == 0){
-				try {
-					// 若没有数据则阻塞
-					TimeUnit.SECONDS.sleep(3);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else {
-				TranObject tran = mClient.removeQueueEle(0);
-				mClient.send(tran);
+			TranObject tran = mClient.removeQueueEle();
+			if (tran == null){
+				continue;
 			}
+			mClient.send(tran);
 		}
 	}
 

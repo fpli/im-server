@@ -23,6 +23,12 @@ public class ServerListen {
 		try {
 			server = new ServerSocket(PORT);
 			System.out.println("服务器已经启动...");
+			Runtime.getRuntime().addShutdownHook(new Thread(){
+				@Override
+				public void run() {
+					close();
+				}
+			});
 		} catch (IOException e) {
 			System.out.println("服务器启动失败");
 			e.printStackTrace();
@@ -30,6 +36,7 @@ public class ServerListen {
 		while(true){
 			try {
 				Socket client = server.accept();//该方法是阻塞方法
+				client.setKeepAlive(true);
 				new ClientActivity(this, client);
 			} catch (IOException e) {
 				e.printStackTrace();

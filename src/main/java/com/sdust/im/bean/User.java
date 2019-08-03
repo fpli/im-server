@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * 类名：User 说明：用户对象
+ * 类名：User 说明：账户对象
  */
 public class User implements Serializable {
 

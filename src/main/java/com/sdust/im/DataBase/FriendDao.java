@@ -8,13 +8,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 描述:好友关系操作类
+ */
 public class FriendDao {
+
 	//防止初始化
 	private FriendDao() {}
 
+	/**
+	 * 描述:根据主人id，查找好友
+	 * @param id 主人id
+	 * @return 好友集合
+	 */
 	public static ArrayList<User> getFriend(int id){
-		ArrayList<User> list = new ArrayList<User>();
-		String sql0 = "use myqq";
+		ArrayList<User> list = new ArrayList<>();
+		String sql0 = "use test";
 		String sql1 = "select * " +
 				      "from friendlist as f left outer join user as u " +
 				      "on f.friendid=u.id "+
@@ -51,9 +60,14 @@ public class FriendDao {
 		return list;
 	}
 
+	/**
+	 * 描述:添加好友
+	 * @param id 主人id
+	 * @param friendID 好友id
+	 */
 	public static void addFriend(int id, int friendID) {
-		String sql0 = "use myqq";
-		String sql1 = "insert into friendlist(master,friendid) " +
+		String sql0 = "use test";
+		String sql1 = "insert into friendlist(master, friendid) " +
 				"values(?,?)";
 		Connection con = DBPool.getConnection();
 		try {

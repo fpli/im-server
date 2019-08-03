@@ -10,7 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50623
 File Encoding         : 65001
 
-Date: 2015-05-30 12:51:55
+Date: 2015select
+    f.friendid,
+    f.master
+from
+    friendlist f;
+
+-05-30 12:51:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;

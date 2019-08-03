@@ -20,7 +20,7 @@ public class ThreadPool {
     	service = Executors.newCachedThreadPool() ;
     }
 
-    public void  execute(Runnable thread){
+    public void execute(Runnable thread){
     	service.execute(thread);
     }
 

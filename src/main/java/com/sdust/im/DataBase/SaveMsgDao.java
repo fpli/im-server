@@ -55,7 +55,7 @@ public class SaveMsgDao {
 	 * 
 	 */
 	public static void insertSaveMsg(int myid, TranObject tran){
-		String sql0 = "use myqq";
+		String sql0 = "use test";
 		String sql1= "insert into SaveMsg(sendid,getid,msg,trantype,time,resultType,messageType,sendname)" +
 				"values(?,?,?,?,?,?,?,?)";
 		Connection con = DBPool.getConnection();
@@ -105,7 +105,7 @@ public class SaveMsgDao {
 	 * 删除保存的离线信息
 	 */
 	public static void  deleteSaveMsg(int getid){
-		String sql0 = "use  myqq";
+		String sql0 = "use  test";
 		String sql1 = "delete from saveMsg " + "where getid = ?";
 		Connection con = DBPool.getConnection();
 		PreparedStatement ps;
@@ -137,7 +137,7 @@ public class SaveMsgDao {
 	 */
 	public static ArrayList<TranObject> selectMsg(int id) {
 		ArrayList<TranObject> msgList = new ArrayList<>();
-		String sq0 = "use myqq";
+		String sq0 = "use test";
 		String sql1 = "select * " +
 				      "from saveMsg " +
 				      "where getid=?";
