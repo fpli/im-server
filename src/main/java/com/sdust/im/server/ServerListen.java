@@ -7,8 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * 客户端使用 Scoket(ip, port);参数是服务器的ip和端口号，因为没有指定
- * 客户端套接字的准确ip和端口，所以服务器发往一台机器上的任一客户端的消息，其他 客户端都能收到。所以创建套接字时，最好指定套接字端口
+ * 描述:服务端启动入口
  */
 public class ServerListen {
 
