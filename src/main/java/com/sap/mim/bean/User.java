@@ -3,7 +3,7 @@
  * 时间：2015年5月9日上午10:23:19
  * 作者：修维康
  */
-package com.sdust.im.bean;
+package com.sap.mim.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;

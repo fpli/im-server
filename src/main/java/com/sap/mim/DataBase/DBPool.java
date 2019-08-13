@@ -1,4 +1,4 @@
-package com.sdust.im.DataBase;
+package com.sap.mim.DataBase;
 
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 

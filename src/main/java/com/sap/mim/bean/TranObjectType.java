@@ -1,4 +1,4 @@
-package com.sdust.im.bean;
+package com.sap.mim.bean;
 
 /**
  * 传输对象类型

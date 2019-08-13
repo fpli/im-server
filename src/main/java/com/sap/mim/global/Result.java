@@ -1,4 +1,4 @@
-package com.sdust.im.global;
+package com.sap.mim.global;
 
 public enum Result {
 	ACCOUNT_EXISTED,     //账号已注册

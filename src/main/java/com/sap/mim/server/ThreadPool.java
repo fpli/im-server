@@ -1,4 +1,4 @@
-package com.sdust.im.server;
+package com.sap.mim.server;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

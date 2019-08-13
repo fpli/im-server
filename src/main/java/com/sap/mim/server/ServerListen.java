@@ -1,6 +1,6 @@
-package com.sdust.im.server;
+package com.sap.mim.server;
 
-import com.sdust.im.client.ClientActivity;
+import com.sap.mim.client.ClientActivity;
 
 import java.io.IOException;
 import java.net.ServerSocket;

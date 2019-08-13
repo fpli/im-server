@@ -1,6 +1,6 @@
-package com.sdust.im.client;
+package com.sap.mim.client;
 
-import com.sdust.im.bean.TranObject;
+import com.sap.mim.bean.TranObject;
 
 
 /**

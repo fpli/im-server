@@ -1,20 +1,19 @@
-package com.sdust.im.client;
+package com.sap.mim.client;
 
-import com.sdust.im.DataBase.FriendDao;
-import com.sdust.im.DataBase.SaveMsgDao;
-import com.sdust.im.DataBase.UserDao;
-import com.sdust.im.bean.TranObject;
-import com.sdust.im.bean.TranObjectType;
-import com.sdust.im.bean.User;
-import com.sdust.im.global.Result;
-import com.sdust.im.server.ServerListen;
+import com.sap.mim.DataBase.FriendDao;
+import com.sap.mim.DataBase.SaveMsgDao;
+import com.sap.mim.bean.TranObject;
+import com.sap.mim.bean.TranObjectType;
+import com.sap.mim.bean.User;
+import com.sap.mim.DataBase.UserDao;
+import com.sap.mim.global.Result;
+import com.sap.mim.server.ServerListen;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -207,7 +206,7 @@ public class ClientActivity {
 		if (result == Result.FRIEND_REQUEST_RESPONSE_ACCEPT) {
 			System.out.println("接收方id" + tran.getReceiveId());
 			FriendDao.addFriend(tran.getReceiveId(), tran.getSendId());
-			FriendDao.addFriend(tran.getSendId(), tran.getReceiveId());
+			FriendDao.addFriend(tran.getSendId(),    tran.getReceiveId());
 			System.out.println("添加好友成功....");
 			// 向好友发起方 发送自己的信息
 			tran.setObject(user);
@@ -257,11 +256,20 @@ public class ClientActivity {
 	 * 发送数据 如果是从好友那里发送来的 就先添加到队列 并发控制，因为同步性太强 否则直接发送； 属于发送线程
 	 */
 	public void insertQueue(TranObject tran) {
-		sendQueue.add(tran);
+		try {
+			sendQueue.put(tran);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	public TranObject removeQueueEle() {
-		return sendQueue.poll();
+		try {
+			return sendQueue.take();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -1,7 +1,7 @@
-package com.sdust.im.client;
+package com.sap.mim.client;
 
-import com.sdust.im.bean.TranObject;
-import com.sdust.im.bean.TranObjectType;
+import com.sap.mim.bean.TranObject;
+import com.sap.mim.bean.TranObjectType;
 
 import java.io.EOFException;
 import java.io.IOException;

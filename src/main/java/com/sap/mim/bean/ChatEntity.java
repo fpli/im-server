@@ -1,4 +1,4 @@
-package com.sdust.im.bean;
+package com.sap.mim.bean;
 
 import java.io.Serializable;
 

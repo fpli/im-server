@@ -1,5 +1,5 @@
-package com.sdust.im.server;
-import com.sdust.im.client.ClientActivity;
+package com.sap.mim.server;
+import com.sap.mim.client.ClientActivity;
 
 import java.util.HashMap;
 

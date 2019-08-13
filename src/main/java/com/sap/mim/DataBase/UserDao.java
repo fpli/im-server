@@ -1,6 +1,6 @@
-package com.sdust.im.DataBase;
+package com.sap.mim.DataBase;
 
-import com.sdust.im.bean.User;
+import com.sap.mim.bean.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

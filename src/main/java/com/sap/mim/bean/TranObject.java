@@ -1,6 +1,6 @@
-package com.sdust.im.bean;
+package com.sap.mim.bean;
 
-import com.sdust.im.global.Result;
+import com.sap.mim.global.Result;
 
 import java.io.Serializable;
 

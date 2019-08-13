@@ -1,10 +1,10 @@
-package com.sdust.im.DataBase;
+package com.sap.mim.DataBase;
 
-import com.sdust.im.bean.ChatEntity;
-import com.sdust.im.bean.TranObject;
-import com.sdust.im.bean.TranObjectType;
-import com.sdust.im.bean.User;
-import com.sdust.im.global.Result;
+import com.sap.mim.bean.ChatEntity;
+import com.sap.mim.bean.TranObject;
+import com.sap.mim.bean.TranObjectType;
+import com.sap.mim.bean.User;
+import com.sap.mim.global.Result;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
