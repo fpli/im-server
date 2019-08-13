@@ -16,10 +16,10 @@ import io.netty.handler.codec.MessageToByteEncoder;
  * 3.要传输的数据
  * </pre>
  */
-public class SmartCarEncoder extends MessageToByteEncoder<SmartCarProtocol> {
+public class SmartCarEncoder extends MessageToByteEncoder<SmartSIMProtocol> {
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, SmartCarProtocol msg, ByteBuf out) throws Exception {
+    protected void encode(ChannelHandlerContext ctx, SmartSIMProtocol msg, ByteBuf out) throws Exception {
         // 写入消息SmartCar的具体内容
         // 1.写入消息的开头的信息标志(int类型)
         out.writeInt(msg.getHead_data());

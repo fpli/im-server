@@ -11,13 +11,13 @@ public class TranObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Object object;
+	private Object         object;
 	private TranObjectType tranType;
-	private Result result;
-	private String sendTime;
-	private int sendId;
-	private int receiveId;
-	private String sendName;
+	private Result         result;
+	private String         sendTime;
+	private int            sendId;
+	private String         sendName;
+	private int            receiveId;
 
 	public TranObject(){}
 

@@ -50,7 +50,7 @@ public class Server {
             ch.pipeline().addLast(new SmartCarEncoder());
             ch.pipeline().addLast(new SmartCarDecoder());
             // 处理网络IO
-            ch.pipeline().addLast(new ServerHandler());
+            ch.pipeline().addLast(new ChildNioSocketChannelHandler());
         }
     }
 

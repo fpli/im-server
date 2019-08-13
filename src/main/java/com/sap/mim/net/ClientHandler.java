@@ -18,7 +18,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
         // 要发送信息的长度
         int contentLength = content.length;
 
-        SmartCarProtocol protocol = new SmartCarProtocol();
+        SmartSIMProtocol protocol = new SmartSIMProtocol();
         protocol.setContentLength(contentLength);
         protocol.setContent(content);
 
@@ -31,7 +31,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
             // 用于获取客户端发来的数据信息
-            SmartCarProtocol body = (SmartCarProtocol) msg;
+            SmartSIMProtocol body = (SmartSIMProtocol) msg;
             System.out.println("Client接受的客户端的信息 :" + body.toString());
 
         } finally {

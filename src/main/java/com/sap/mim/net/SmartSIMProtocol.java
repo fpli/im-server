@@ -12,7 +12,7 @@ package com.sap.mim.net;
  * 3.要传输的数据
  * </pre>
  */
-public class SmartCarProtocol {
+public class SmartSIMProtocol {
 
     /**
      * 消息的开头的信息标志

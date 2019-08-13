@@ -78,7 +78,7 @@ public class SmartCarDecoder extends ByteToMessageDecoder {
             byte[] data = new byte[length];
             buffer.readBytes(data);
 
-            SmartCarProtocol protocol = new SmartCarProtocol();
+            SmartSIMProtocol protocol = new SmartSIMProtocol();
             protocol.setContentLength(data.length);
             protocol.setContent(data);
             out.add(protocol);
