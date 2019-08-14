@@ -2,14 +2,12 @@ package com.sap.mim.bean;
 
 import com.sap.mim.global.Result;
 
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * 描述: 传输对象模型
  */
-public class TranObject implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class TranObject implements Externalizable {
 
 	private Object         object;
 	private TranObjectType tranType;
@@ -69,6 +67,15 @@ public class TranObject implements Serializable {
 	public void setTranType(TranObjectType tranType) {
 		this.tranType = tranType;
 	}
-	
-	
+
+
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+
+	}
+
+	@Override
+	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+
+	}
 }

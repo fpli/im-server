@@ -1,5 +1,6 @@
 package com.sap.mim.server;
 
+import com.sap.mim.bean.ChatMessage;
 import com.sap.mim.bean.TranObject;
 import com.sap.mim.bean.User;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -12,10 +13,10 @@ public class Connector {
 
     private User account;
 
-    private NioSocketChannel ch;
+    private NioSocketChannel nioSocketChannel;
 
-    public void sendTranObject(TranObject tranObject){
-        ch.writeAndFlush(tranObject);
+    public void sentChatMessage(ChatMessage chatMessage){
+        nioSocketChannel.writeAndFlush(chatMessage);
     }
 
     public User getAccount() {
@@ -26,11 +27,11 @@ public class Connector {
         this.account = account;
     }
 
-    public NioSocketChannel getCh() {
-        return ch;
+    public NioSocketChannel getNioSocketChannel() {
+        return nioSocketChannel;
     }
 
-    public void setCh(NioSocketChannel ch) {
-        this.ch = ch;
+    public void setNioSocketChannel(NioSocketChannel nioSocketChannel) {
+        this.nioSocketChannel = nioSocketChannel;
     }
 }

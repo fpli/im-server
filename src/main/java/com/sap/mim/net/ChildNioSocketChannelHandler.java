@@ -1,8 +1,12 @@
 package com.sap.mim.net;
 
-import io.netty.channel.ChannelHandlerAdapter;
+import com.sap.mim.bean.ACKMessage;
+import com.sap.mim.server.Container;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * 描述:客户端对应的Channel处理器
@@ -11,14 +15,18 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
-        System.out.println("Server接受的客户端的信息 :" + msg.toString());
-        // 会写数据给客户端
-        String str = "Hi I am Server ...";
-        SmartSIMProtocol response = new SmartSIMProtocol();
-        response.setContentLength(str.getBytes().length);
-        response.setContent(str.getBytes());
-        // 当服务端完成写操作后，关闭与客户端的连接
+        SmartSIMProtocol response  = new SmartSIMProtocol();
+        ACKMessage ackMessage      = new ACKMessage();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos     = new ObjectOutputStream(baos);
+        oos.writeObject(ackMessage);
+        response.setHead_data(ConstantValue.HEAD_DATA);
+        byte[] data = baos.toByteArray();
+        response.setContentLength(data.length);
+        response.setContent(data);
         ctx.writeAndFlush(response);
+        baos = null;
+        Container.receiveSmartSIMProtocolMsg(ctx, msg);
     }
 
     @Override

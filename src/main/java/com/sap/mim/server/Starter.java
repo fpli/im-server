@@ -1,22 +1,18 @@
-package com.sap.mim.net;
+package com.sap.mim.server;
 
+import com.sap.mim.net.ChildChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-public class Server {
+public class Starter {
 
-    public Server() {
-    }
-
-    public void bind(int port) throws Exception {
+    public static void main(String[] args) throws Exception {
         // 配置NIO线程组
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -26,11 +22,11 @@ public class Server {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new ChildChannelHandler())//
+                    .childHandler(new ChildChannelInitializer())//
                     .childOption(ChannelOption.SO_BACKLOG, 1024) // 设置tcp缓冲区 // (5)
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
             // 绑定端口 同步等待绑定成功
-            ChannelFuture f = b.bind(port).sync(); // (7)
+            ChannelFuture f = b.bind(5000).sync(); // (7)
             // 等到服务端监听端口关闭
             f.channel().closeFuture().sync();
         } finally {
@@ -40,22 +36,5 @@ public class Server {
         }
     }
 
-    /**
-     * 网络事件处理器
-     */
-    private class ChildChannelHandler extends ChannelInitializer<NioSocketChannel> {
-        @Override
-        protected void initChannel(NioSocketChannel ch) throws Exception {
-            // 添加自定义协议的编解码工具
-            ch.pipeline().addLast(new SmartCarEncoder());
-            ch.pipeline().addLast(new SmartCarDecoder());
-            // 处理网络IO
-            ch.pipeline().addLast(new ChildNioSocketChannelHandler());
-        }
-    }
 
-    public static void main(String[] args) throws Exception {
-        new Server().bind(9999);
-    }
 }
-

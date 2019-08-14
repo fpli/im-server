@@ -5,13 +5,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ConnectorManager {
 
-    private ConcurrentHashMap<Integer, Connector> connectorConcurrentHashMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Integer, Connector> connectorConcurrentHashMap = new ConcurrentHashMap<>();
 
-    public void addConnector(Connector connector){
-        connectorConcurrentHashMap.put(1, connector);
+    public static void addConnector(Integer accountId, Connector connector){
+        connectorConcurrentHashMap.put(accountId, connector);
     }
 
-    public Connector findConnectorByAccountId(Integer accountId){
+    public static Connector findConnectorByAccountId(Integer accountId){
         return connectorConcurrentHashMap.get(accountId);
     }
 }
