@@ -3,7 +3,7 @@ package com.sap.mim.DataBase;
 import com.sap.mim.bean.ChatEntity;
 import com.sap.mim.bean.TranObject;
 import com.sap.mim.bean.TranObjectType;
-import com.sap.mim.bean.User;
+import com.sap.mim.bean.Account;
 import com.sap.mim.global.Result;
 
 import java.sql.Connection;
@@ -165,7 +165,7 @@ public class SaveMsgDao {
 					chatEntity.setSendTime(rs.getString("time"));
 					tran.setObject(chatEntity);
 				} else if(idResult.get(rs.getInt("resultType")) == Result.FRIEND_REQUEST_RESPONSE_ACCEPT){
-					ArrayList<User> list = UserDao.selectFriendByAccountOrID(tran.getSendId());
+					ArrayList<Account> list = UserDao.selectFriendByAccountOrID(tran.getSendId());
 					tran.setObject(list.get(0));
 					tran.setSendTime(rs.getString("time"));
 				} else {

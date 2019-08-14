@@ -1,6 +1,6 @@
 package com.sap.mim.DataBase;
 
-import com.sap.mim.bean.User;
+import com.sap.mim.bean.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +21,8 @@ public class FriendDao {
 	 * @param id 主人id
 	 * @return 好友集合
 	 */
-	public static ArrayList<User> getFriend(int id){
-		ArrayList<User> list = new ArrayList<>();
+	public static ArrayList<Account> getFriend(int id){
+		ArrayList<Account> list = new ArrayList<>();
 		String sql0 = "use test";
 		String sql1 = "select * " +
 				      "from friendlist as f left outer join user as u " +
@@ -38,7 +38,7 @@ public class FriendDao {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			while (rs.next()){
-				User user = new User();
+				Account user = new Account();
 				user.setId(rs.getInt("friendid"));
 				user.setAccount(rs.getString("account"));
 				user.setBirthday(rs.getDate("birthday"));
