@@ -2,7 +2,7 @@ package com.sap.mim.server;
 
 import com.sap.mim.DataBase.UserDao;
 import com.sap.mim.bean.LoginMessage;
-import com.sap.mim.bean.User;
+import com.sap.mim.bean.Account;
 import com.sap.mim.net.SmartSIMProtocol;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -22,15 +22,15 @@ public class LoginTask implements Runnable {
 
     @Override
     public void run() {
-        User user = new User();
-        user.setAccount(loginMessage.getAccountNo());
-        user.setPassword(loginMessage.getPassword());
-        boolean isExisted =  UserDao.login(user);
+        Account account = new Account();
+        account.setAccount(loginMessage.getAccountNo());
+        account.setPassword(loginMessage.getPassword());
+        boolean isExisted =  UserDao.login(account);
         if (isExisted){
             Connector connector = new Connector();
-            connector.setAccount(user);
+            connector.setAccount(account);
             connector.setNioSocketChannel((NioSocketChannel) ctx.channel());
-            ConnectorManager.addConnector(user.getId(), connector);
+            ConnectorManager.addConnector(account.getId(), connector);
         } else {
 
         }

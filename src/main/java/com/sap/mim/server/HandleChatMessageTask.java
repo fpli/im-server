@@ -1,6 +1,7 @@
 package com.sap.mim.server;
 
 import com.sap.mim.bean.ChatMessage;
+import com.sap.mim.bean.MessageType;
 import com.sap.mim.util.MessageIdGenerator;
 
 public class HandleChatMessageTask implements Runnable{
@@ -20,6 +21,7 @@ public class HandleChatMessageTask implements Runnable{
 
         } else {
             chatMessage.setMsgId(MessageIdGenerator.getMsgId());
+            chatMessage.setMessageType(MessageType.S2C);
             connector.sentChatMessage(chatMessage);
         }
     }

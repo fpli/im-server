@@ -1,6 +1,6 @@
 package com.sap.mim.DataBase;
 
-import com.sap.mim.bean.User;
+import com.sap.mim.bean.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +45,7 @@ public class UserDao {
 	 * 向数据库中添加账户
 	 * 
 	 */
-	public static int insertInfo(User user) {
+	public static int insertInfo(Account account) {
 		String sql0 = "use test";
 		String sql1 = "insert into user (account,name,photo,birthday,password,gender)"
 				+ " values(?,?,?,?,?,?)";
@@ -60,13 +60,12 @@ public class UserDao {
 			ps = con.prepareStatement(sql0);
 			ps.execute();
 			ps = con.prepareStatement(sql1);
-			ps.setString(1, user.getAccount());
-			ps.setString(2, user.getUserName());
-			ps.setBytes(3, user.getPhoto());
-			System.out.println(user.getPhoto().length);
-			ps.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
-			ps.setString(5, user.getPassword());
-			ps.setInt(6, user.getGender());
+			ps.setString(1, account.getAccount());
+			ps.setString(2, account.getUserName());
+			ps.setBytes(3, account.getPhoto());
+			ps.setDate(4, new java.sql.Date(account.getBirthday().getTime()));
+			ps.setString(5, account.getPassword());
+			ps.setInt(6,    account.getGender());
 			ps.executeUpdate();
 			con.commit();
 		} catch (SQLException e) {
@@ -109,7 +108,7 @@ public class UserDao {
 	/**
 	 * 进行登录的验证
 	 */
-	public static boolean login(User user) {
+	public static boolean login(Account user) {
 		boolean isExisted = false;
 		String sql0 = "use test";
 		String sql1 = "select * from user where account=? and password=?";
@@ -175,8 +174,8 @@ public class UserDao {
 		DBPool.close(con);
 	}
 
-	public static ArrayList<User> selectFriendByAccountOrID(Object condition) {
-		ArrayList<User> list = new ArrayList<>();
+	public static ArrayList<Account> selectFriendByAccountOrID(Object condition) {
+		ArrayList<Account> list = new ArrayList<>();
 		String sql0 = "use test";
 		String sql1 = "";
 		int conFlag = 0;// 默认是0 表示使用id查找 1为使用id
@@ -198,7 +197,7 @@ public class UserDao {
 				ps.setInt(1, (Integer) condition);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				User friend = new User();
+				Account friend = new Account();
 				friend.setId(rs.getInt("id"));
 				friend.setAccount(rs.getString("account"));
 				friend.setBirthday(rs.getDate("birthday"));
@@ -219,8 +218,8 @@ public class UserDao {
 		return list;
 	}
 
-	public static ArrayList<User> selectFriendByMix(String[] mix) {
-		ArrayList<User> list = new ArrayList<>();
+	public static ArrayList<Account> selectFriendByMix(String[] mix) {
+		ArrayList<Account> list = new ArrayList<>();
 		String sql0 = "use test";
 		String sql1 = "select * "
 				+ "from user "
@@ -243,7 +242,7 @@ public class UserDao {
 			ps.setInt(2, Integer.parseInt(mix[2]));
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				User friend = new User();
+				Account friend = new Account();
 				friend.setId(rs.getInt("id"));
 				friend.setAccount(rs.getString("account"));
 				friend.setBirthday(rs.getDate("birthday"));
