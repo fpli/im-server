@@ -22,9 +22,10 @@ public class Starter {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(new ChildChannelInitializer())//
-                    .childOption(ChannelOption.SO_BACKLOG, 1024) // 设置tcp缓冲区 // (5)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
+                    .childHandler(new ChildChannelInitializer())
+                    .childOption(ChannelOption.SO_BACKLOG, 1024)
+                    .childOption(ChannelOption.TCP_NODELAY, true)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true);
             // 绑定端口 同步等待绑定成功
             ChannelFuture f = b.bind(5000).sync(); // (7)
             // 等到服务端监听端口关闭
