@@ -25,7 +25,6 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf>
 
     @Override
     protected void messageReceived(ChannelHandlerContext arg0, ByteBuf msg) throws Exception {
-        // TODO Auto-generated method stub
         System.out.println("Client received: " + ByteBufUtil.hexDump(msg.readBytes(msg.readableBytes())));
     }
 }

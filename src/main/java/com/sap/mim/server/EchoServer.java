@@ -5,8 +5,8 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 
 public class EchoServer {
@@ -27,11 +27,11 @@ public class EchoServer {
             设置 InetSocketAddress 让服务器监听某个端口已等待客户端连接
              */
             b.group(group).channel(NioServerSocketChannel.class).
-                    localAddress(port).childHandler(new ChannelInitializer<SocketChannel>() {
+                    localAddress(port).childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
+                protected void initChannel(NioSocketChannel ch) throws Exception {
                     ch.pipeline().addLast(new IdleStateHandler(0,0,5));
-                    ch.pipeline().addLast(new EchoServerHandler());
+                    ch.pipeline().addLast(new EchoChildHandler());
                 }
             });
             /*Binds server, waits for server to close, and releases resources
