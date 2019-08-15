@@ -15,6 +15,7 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
+        Container.receiveSmartSIMProtocolMsg(ctx, msg);
         SmartSIMProtocol response  = new SmartSIMProtocol();
         ACKMessage ackMessage      = new ACKMessage();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -26,7 +27,6 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         response.setContent(data);
         ctx.writeAndFlush(response);
         baos = null;
-        Container.receiveSmartSIMProtocolMsg(ctx, msg);
     }
 
     @Override

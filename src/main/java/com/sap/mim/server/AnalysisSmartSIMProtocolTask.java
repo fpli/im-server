@@ -25,6 +25,7 @@ public class AnalysisSmartSIMProtocolTask implements Runnable{
             byte[] data               = smartSIMProtocol.getContent();
             ByteArrayInputStream bais = new ByteArrayInputStream(data);
             ObjectInputStream ois     = new ObjectInputStream(bais);
+            //System.out.println(ois.readObject());
             MessageModel messageModel = (MessageModel) ois.readObject();
             Engine.handleMessage(ctx, messageModel);
         } catch (IOException|ClassNotFoundException e) {

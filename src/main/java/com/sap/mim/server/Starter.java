@@ -21,7 +21,7 @@ public class Starter {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new ChildChannelInitializer())//
                     .childOption(ChannelOption.SO_BACKLOG, 1024) // 设置tcp缓冲区 // (5)
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
