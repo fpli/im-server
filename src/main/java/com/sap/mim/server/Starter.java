@@ -20,10 +20,10 @@ public class Starter {
             // 服务器辅助启动类配置
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
+                    .option(ChannelOption.SO_BACKLOG,1024)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new ChildChannelInitializer())
-                    .childOption(ChannelOption.SO_BACKLOG, 1024)
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             // 绑定端口 同步等待绑定成功
