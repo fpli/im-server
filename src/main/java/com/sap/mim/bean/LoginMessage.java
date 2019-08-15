@@ -42,4 +42,12 @@ public class LoginMessage extends MessageModel{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "LoginMessage{" +
+                "accountNo='" + accountNo + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

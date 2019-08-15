@@ -19,6 +19,7 @@ public class Engine {
     public static void handleMessage(ChannelHandlerContext ctx, MessageModel messageModel){
         if (messageModel instanceof LoginMessage){
             LoginMessage loginMessage = (LoginMessage) messageModel;
+            System.out.println(loginMessage);
             LoginTask loginTask       = new LoginTask(ctx, loginMessage);
             executorService.submit(loginTask);
         }
@@ -26,6 +27,7 @@ public class Engine {
         if (messageModel instanceof ACKMessage){
             ACKMessage ackMessage = (ACKMessage) messageModel;
             Long ackmsgId = ackMessage.getMsgId();
+            System.out.println(ackMessage);
             // 表示客户端接收成功，服务端可以清理这个消息
         }
         // 服务端接收到客户端的聊天消息
