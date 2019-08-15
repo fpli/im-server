@@ -19,7 +19,7 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
         ACKMessage ackMessage = new ACKMessage();
         ackMessage.setMessageType(MessageType.ACK);
         ackMessage.setMsgId(MessageIdGenerator.getMsgId());
-        //NetService.getNetService().sendMessageModel(ackMessage);
+        NetService.getNetService().sendMessageModel(ackMessage);
     }
 
     @Override
