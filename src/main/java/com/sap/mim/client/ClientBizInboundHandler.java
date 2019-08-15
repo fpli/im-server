@@ -23,7 +23,13 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
     }
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.close();
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         byte[] data = msg.getContent();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
         ObjectInputStream objectInputStream       = new ObjectInputStream(byteArrayInputStream);
@@ -47,13 +53,5 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
                 Account account = loginResultMessage.getAccount();
             }
         }
-
     }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
-    }
-
 }

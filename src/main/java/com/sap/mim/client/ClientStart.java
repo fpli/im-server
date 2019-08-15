@@ -15,13 +15,14 @@ public class ClientStart {
         loginMessage.setAccountNo("ggggggggggg");
         loginMessage.setPassword("123456");
         NetService.getNetService().sendMessageModel(loginMessage);
-
+        System.out.println("消息发送--->"+123456);
         for (int i=0; i< 40; i++){
 
             ACKMessage ackMessage = new ACKMessage();
             ackMessage.setMessageType(MessageType.ACK);
             ackMessage.setMsgId(MessageIdGenerator.getMsgId());
             NetService.getNetService().sendMessageModel(ackMessage);
+            System.out.println("消息发送--->"+i);
         }
     }
 

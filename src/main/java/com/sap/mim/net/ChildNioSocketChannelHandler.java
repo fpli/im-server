@@ -15,7 +15,13 @@ import java.io.ObjectOutputStream;
 public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<SmartSIMProtocol> {
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.close();
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         Container.receiveSmartSIMProtocolMsg(ctx, msg);
         SmartSIMProtocol response  = new SmartSIMProtocol();
         ACKMessage ackMessage      = new ACKMessage();
@@ -29,12 +35,6 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         response.setContentLength(data.length);
         response.setContent(data);
         ctx.channel().writeAndFlush(response);
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
     }
 }
 
