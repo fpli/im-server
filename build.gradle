@@ -17,5 +17,6 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.3'
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.1'
-    implementation 'io.netty:netty-all:5.0.0.Alpha2'
+    //implementation 'io.netty:netty-all:5.0.0.Alpha2'
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.16.Final'
 }
