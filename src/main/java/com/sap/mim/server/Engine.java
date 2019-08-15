@@ -4,7 +4,6 @@ import com.sap.mim.bean.ACKMessage;
 import com.sap.mim.bean.ChatMessage;
 import com.sap.mim.bean.LoginMessage;
 import com.sap.mim.bean.MessageModel;
-import com.sap.mim.util.MessageIdGenerator;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.ExecutorService;
