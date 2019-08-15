@@ -1,23 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost_3306
-Source Server Version : 50623
-Source Host           : localhost:3306
-Source Database       : myqq
-
-Target Server Type    : MYSQL
-Target Server Version : 50623
-File Encoding         : 65001
-
-Date: 2015select
-    f.friendid,
-    f.master
-from
-    friendlist f;
-
--05-30 12:51:55
-*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -56,8 +36,8 @@ CREATE TABLE `savemsg` (
 -- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自动生成的ID',
   `account` varchar(18) NOT NULL,
   `gender` tinyint(4) DEFAULT NULL,

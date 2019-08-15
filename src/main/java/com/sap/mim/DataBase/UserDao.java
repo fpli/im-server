@@ -22,7 +22,7 @@ public class UserDao {
 	 */
 	public static boolean selectAccount(String account) {
 		String sql0 = "use test";
-		String sql1 = "select * from user where account=?";
+		String sql1 = "select * from account where account=?";
 		Connection con = DBPool.getConnection();
 		try {
 			con.setAutoCommit(false);
@@ -47,7 +47,7 @@ public class UserDao {
 	 */
 	public static int insertInfo(Account account) {
 		String sql0 = "use test";
-		String sql1 = "insert into user (account,name,photo,birthday,password,gender)"
+		String sql1 = "insert into account (account,name,photo,birthday,password,gender)"
 				+ " values(?,?,?,?,?,?)";
 		Connection con = DBPool.getConnection();
 		try {
@@ -85,7 +85,7 @@ public class UserDao {
 	 */
 	public static int getLastID(Connection con) {
 		String sql0 = "use test";
-		String sql1 = "select MAX(id) as ID from user";// 注意:使用MAX(ID) 必须加上 as
+		String sql1 = "select MAX(id) as ID from account";// 注意:使用MAX(ID) 必须加上 as
 														// id 翻译
 		PreparedStatement ps;
 		ResultSet rs;
@@ -111,7 +111,7 @@ public class UserDao {
 	public static boolean login(Account user) {
 		boolean isExisted = false;
 		String sql0 = "use test";
-		String sql1 = "select * from user where account=? and password=?";
+		String sql1 = "select * from account where account=? and password=?";
 		Connection con = DBPool.getConnection();
 		PreparedStatement ps;
 		ResultSet rs;
@@ -145,7 +145,7 @@ public class UserDao {
 	 */
 	public static void updateIsOnline(int id, int isOnline) {
 		String sql0 = "use test";
-		String sql1 = "update user set isOnline = ? where id = ?";
+		String sql1 = "update account set isOnline = ? where id = ?";
 		Connection con = DBPool.getConnection();
 		try {
 			con.setAutoCommit(false);
@@ -180,10 +180,10 @@ public class UserDao {
 		String sql1 = "";
 		int conFlag = 0;// 默认是0 表示使用id查找 1为使用id
 		if (condition instanceof String) {
-			sql1 = "select * from user where account=?";
+			sql1 = "select * from account where account=?";
 			conFlag = 1;
 		} else if (condition instanceof Integer)
-			sql1 = "select * from user where id=?";
+			sql1 = "select * from account where id=?";
 		Connection con = DBPool.getConnection();
 		PreparedStatement ps;
 		ResultSet rs;
@@ -222,7 +222,7 @@ public class UserDao {
 		ArrayList<Account> list = new ArrayList<>();
 		String sql0 = "use test";
 		String sql1 = "select * "
-				+ "from user "
+				+ "from account "
 				+ "where ((YEAR(CURDATE())-YEAR(birthday))-(RIGHT(CURDATE(),5)<RIGHT(birthday,5))) "
 				+ "between ? and ? ";
 		Connection con = DBPool.getConnection();
