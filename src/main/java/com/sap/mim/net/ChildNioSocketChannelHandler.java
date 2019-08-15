@@ -1,6 +1,7 @@
 package com.sap.mim.net;
 
 import com.sap.mim.bean.ACKMessage;
+import com.sap.mim.bean.MessageType;
 import com.sap.mim.server.Container;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -18,6 +19,8 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         Container.receiveSmartSIMProtocolMsg(ctx, msg);
         SmartSIMProtocol response  = new SmartSIMProtocol();
         ACKMessage ackMessage      = new ACKMessage();
+        ackMessage.setMessageType(MessageType.ACK);
+        ackMessage.setMsgId(12L);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos     = new ObjectOutputStream(baos);
         oos.writeObject(ackMessage);
@@ -25,13 +28,12 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         byte[] data = baos.toByteArray();
         response.setContentLength(data.length);
         response.setContent(data);
-        ctx.writeAndFlush(response);
-        baos = null;
+        ctx.channel().writeAndFlush(response);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        // cause.printStackTrace();
+        cause.printStackTrace();
         ctx.close();
     }
 }

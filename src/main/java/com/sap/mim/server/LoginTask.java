@@ -56,7 +56,10 @@ public class LoginTask implements Runnable {
             objectOutputStream.writeObject(loginResultMessage);
             SmartSIMProtocol response  = new SmartSIMProtocol();
             response.setHead_data(ConstantValue.HEAD_DATA);
-            ctx.writeAndFlush(response);
+            byte[] data = byteArrayOutputStream.toByteArray();
+            response.setContentLength(data.length);
+            response.setContent(data);
+            ctx.channel().writeAndFlush(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
