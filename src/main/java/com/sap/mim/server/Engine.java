@@ -33,6 +33,7 @@ public class Engine {
         // 服务端接收到客户端的聊天消息
         if (messageModel instanceof ChatMessage){
             ChatMessage chatMessage = (ChatMessage) messageModel;
+            System.out.println(chatMessage);
             HandleChatMessageTask handleChatMessageTask = new HandleChatMessageTask(chatMessage);
             executorService.submit(handleChatMessageTask);
         }

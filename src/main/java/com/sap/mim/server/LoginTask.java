@@ -49,6 +49,10 @@ public class LoginTask implements Runnable {
             loginResultMessage.setCode(1);
             loginResultMessage.setAccount(null);
             loginResultMessage.setMessage("failed, account not exits");
+            Connector connector = new Connector();
+            connector.setAccount(account);
+            connector.setNioSocketChannel((NioSocketChannel) ctx.channel());
+            ConnectorManager.addConnector(account.getId(), connector);
         }
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

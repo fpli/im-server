@@ -23,9 +23,10 @@ import java.net.InetSocketAddress;
 public class NetService {
 
     private static NetService netService;
-    InetSocketAddress remoteAddress = new InetSocketAddress("127.0.0.1", 5000);
 
-    ChannelPoolMap<InetSocketAddress, SimpleChannelPool> poolMap;
+    private static final InetSocketAddress remoteAddress = new InetSocketAddress("127.0.0.1", 5000);
+
+    private static ChannelPoolMap<InetSocketAddress, SimpleChannelPool> poolMap;
 
     private NetService() {
     }
@@ -62,29 +63,34 @@ public class NetService {
                 return new FixedChannelPool(strap.remoteAddress(key), new NettyChannelPoolHandler(), 2);
             }
         };
+
     }
 
     public void sendMessageModel(MessageModel messageModel){
-        final SimpleChannelPool pool = poolMap.get(remoteAddress);
-        Future<Channel> f = pool.acquire();
-        f.addListener((FutureListener<Channel>) f1 -> {
-            if (f1.isSuccess()) {
-                Channel ch = f1.getNow();
-                // 获得要发送信息的字节数组
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
-                objectOutputStream.writeObject(messageModel);
-                byte[] content = byteArrayOutputStream.toByteArray();
-                SmartSIMProtocol request = new SmartSIMProtocol();
-                request.setHead_data(ConstantValue.HEAD_DATA);
-                request.setContentLength(content.length);
-                request.setContent(content);
-                ch.writeAndFlush(request);
-                // Release back to pool
-                pool.release(ch);
-            } else {
-                f1.cause().printStackTrace();
-            }
-        });
+        if (poolMap.contains(remoteAddress)){
+            final SimpleChannelPool pool = poolMap.get(remoteAddress);
+            Future<Channel> f = pool.acquire();
+            f.addListener((FutureListener<Channel>) f1 -> {
+                if (f1.isSuccess()) {
+                    Channel ch = f1.getNow();
+                    // 获得要发送信息的字节数组
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
+                    objectOutputStream.writeObject(messageModel);
+                    byte[] content = byteArrayOutputStream.toByteArray();
+                    SmartSIMProtocol request = new SmartSIMProtocol();
+                    request.setHead_data(ConstantValue.HEAD_DATA);
+                    request.setContentLength(content.length);
+                    request.setContent(content);
+                    ch.writeAndFlush(request);
+                    // Release back to pool
+                    pool.release(ch);
+                } else {
+                    f1.cause().printStackTrace();
+                }
+            });
+        } else {
+            System.out.println("channelPool未创建,不能发送数据");
+        }
     }
 }

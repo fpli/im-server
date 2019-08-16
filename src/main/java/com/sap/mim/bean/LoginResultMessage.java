@@ -57,4 +57,12 @@ public class LoginResultMessage extends MessageModel {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "LoginResultMessage{" +
+                "code=" + code +
+                ", account=" + account +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

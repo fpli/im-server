@@ -42,4 +42,12 @@ public class MessageModel implements Externalizable {
     public void setMsgId(Long msgId) {
         this.msgId = msgId;
     }
+
+    @Override
+    public String toString() {
+        return "MessageModel{" +
+                "msgId=" + msgId +
+                ", messageType=" + messageType +
+                '}';
+    }
 }
