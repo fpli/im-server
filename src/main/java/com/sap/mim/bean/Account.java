@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class Account implements Externalizable {
 
+	private static final long serialVersionUID = -1086962731178609581L;
+
 	private int     id;            // 用户id
 	private String  account;       // 用户账号
 	private String  userName;      // 用户名称
