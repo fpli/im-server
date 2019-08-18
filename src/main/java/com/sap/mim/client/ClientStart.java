@@ -18,6 +18,7 @@ public class ClientStart {
         NetService.getNetService().sendMessageModel(loginMessage);
         System.out.println("消息发送--->"+123456);
 
+
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setMsgId(MessageIdGenerator.getMsgId());
         chatMessage.setMessageType(MessageType.C2S);
@@ -28,6 +29,7 @@ public class ClientStart {
         chatMessage.setContent("通信回话消息".getBytes());
         NetService.getNetService().sendMessageModel(chatMessage);
         System.out.println("通话消息发送--->"+123456);
+
     }
 
 }

@@ -29,6 +29,7 @@ public class Engine {
             Long ackmsgId = ackMessage.getMsgId();
             System.out.println(ackMessage);
             // 表示客户端接收成功，服务端可以清理这个消息
+            Container.remoceSendChatMessage(ackmsgId);
         }
         // 服务端接收到客户端的聊天消息
         if (messageModel instanceof ChatMessage){

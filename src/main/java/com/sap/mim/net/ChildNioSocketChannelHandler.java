@@ -36,5 +36,42 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         response.setContent(data);
         ctx.channel().writeAndFlush(response);
     }
+
+
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        super.channelRegistered(ctx);
+        System.out.println("ChildNioSocketChannelHandler----"+"channelRegistered"+ctx.channel().id());
+    }
+
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        super.channelUnregistered(ctx);
+        System.out.println("ChildNioSocketChannelHandler++++"+"channelUnregistered"+ctx.channel().id());
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        System.out.println("ChildNioSocketChannelHandler---"+"channelActive"+ctx.channel().id());
+        SmartSIMProtocol response  = new SmartSIMProtocol();
+        ACKMessage ackMessage      = new ACKMessage();
+        ackMessage.setMessageType(MessageType.ACK);
+        ackMessage.setMsgId(12L);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos     = new ObjectOutputStream(baos);
+        oos.writeObject(ackMessage);
+        response.setHead_data(ConstantValue.HEAD_DATA);
+        byte[] data = baos.toByteArray();
+        response.setContentLength(data.length);
+        response.setContent(data);
+        ctx.channel().writeAndFlush(response);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        System.out.println("ChildNioSocketChannelHandler+++"+"channelInactive"+ctx.channel().id());
+    }
 }
 

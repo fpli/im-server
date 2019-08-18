@@ -1,6 +1,5 @@
 package com.sap.mim.server;
 
-import com.sap.mim.DataBase.UserDao;
 import com.sap.mim.bean.Account;
 import com.sap.mim.bean.LoginMessage;
 import com.sap.mim.bean.LoginResultMessage;
@@ -14,6 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Random;
 
 
 public class LoginTask implements Runnable {
@@ -36,7 +36,7 @@ public class LoginTask implements Runnable {
         LoginResultMessage loginResultMessage = new LoginResultMessage();
         loginResultMessage.setMsgId(MessageIdGenerator.getMsgId());
         loginResultMessage.setMessageType(MessageType.S2C);
-        boolean isExisted =  UserDao.login(account);
+        boolean isExisted =  true;
         if (isExisted){
             Connector connector = new Connector();
             connector.setAccount(account);
@@ -52,7 +52,7 @@ public class LoginTask implements Runnable {
             Connector connector = new Connector();
             connector.setAccount(account);
             connector.setNioSocketChannel((NioSocketChannel) ctx.channel());
-            ConnectorManager.addConnector(account.getId(), connector);
+            ConnectorManager.addConnector(new Random().nextInt(), connector);
         }
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

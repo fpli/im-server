@@ -32,12 +32,16 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
             ACKMessage ackMessage = (ACKMessage) message;
             Long msgId            = ackMessage.getMsgId();
             // 处理客户端已发送的消息
-
+            System.out.println(ackMessage);
         }
 
         if (message instanceof ChatMessage){
             ChatMessage chatMessage = (ChatMessage) message;
             System.out.println(chatMessage);
+            ACKMessage ackMessage = new ACKMessage();
+            ackMessage.setMessageType(MessageType.ACK);
+            ackMessage.setMsgId(((ChatMessage) message).getMsgId());
+            NetService.getNetService().sendMessageModel(ackMessage);
         }
 
         if (message instanceof LoginResultMessage){
