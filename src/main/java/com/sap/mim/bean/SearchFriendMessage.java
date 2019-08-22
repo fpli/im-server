@@ -4,49 +4,35 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-public class LoginMessage extends MessageModel {
+public class SearchFriendMessage extends MessageModel {
 
-    private static final long serialVersionUID = 3178351358356989351L;
-
+    private static final long serialVersionUID = 6242907966383961315L;
     private C2SMessageType c2SMessageType;
-
-    private String accountNo;
-
-    private String password;
+    private int accountNo;
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         super.writeExternal(out);
         out.writeInt(c2SMessageType.getC2sMessageType());
-        out.writeUTF(accountNo);
-        out.writeUTF(password);
+        out.writeInt(accountNo);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         super.readExternal(in);
         c2SMessageType = C2SMessageType.getC2SMessageTypeById(in.readInt());
-        accountNo = in.readUTF();
-        password  = in.readUTF();
+        accountNo = in.readInt();
     }
 
-    public LoginMessage() {
+    public SearchFriendMessage() {
     }
 
-    public String getAccountNo() {
+    public int getAccountNo() {
         return accountNo;
     }
 
-    public void setAccountNo(String accountNo) {
+    public void setAccountNo(int accountNo) {
         this.accountNo = accountNo;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public C2SMessageType getC2SMessageType() {

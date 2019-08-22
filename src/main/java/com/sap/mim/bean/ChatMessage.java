@@ -1,11 +1,7 @@
 package com.sap.mim.bean;
 
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.util.Arrays;
+public class ChatMessage extends MessageModel {
 
-public class ChatMessage extends MessageModel{
 
     private static final long serialVersionUID = -3089815309304650451L;
 
@@ -16,26 +12,6 @@ public class ChatMessage extends MessageModel{
     private byte[]          content;         // 消息内容
 
     public ChatMessage() {
-    }
-
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        super.writeExternal(out);
-        out.writeInt(senderId);
-        out.writeInt(receiverId);
-        out.writeUTF(sendTime);
-        out.writeInt(chatMessageType.getChatMessageType());
-        out.writeObject(content);
-    }
-
-    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        super.readExternal(in);
-        senderId = in.readInt();
-        receiverId = in.readInt();
-        sendTime = in.readUTF();
-        chatMessageType = ChatMessageType.getChatMessageTypeByChatMessageType(in.readInt());
-        content = (byte[]) in.readObject();
     }
 
     public int getSenderId() {
@@ -76,16 +52,5 @@ public class ChatMessage extends MessageModel{
 
     public void setContent(byte[] content) {
         this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "ChatMessage{" +
-                "senderId=" + senderId +
-                ", receiverId=" + receiverId +
-                ", sendTime='" + sendTime + '\'' +
-                ", chatMessageType=" + chatMessageType +
-                ", content=" + new String(content) +
-                '}';
     }
 }

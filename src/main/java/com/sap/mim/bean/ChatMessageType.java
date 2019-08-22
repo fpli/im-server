@@ -15,28 +15,12 @@ public enum ChatMessageType {
         this.description = description;
     }
 
-    public static ChatMessageType getChatMessageTypeByChatMessageType(Integer chatMessageType){
+    public ChatMessageType getChatMessageTypeByChatMessageType(Integer chatMessageType){
         for (ChatMessageType chatMessageTypeItem : values()){
             if (chatMessageTypeItem.chatMessageType.equals(chatMessageType)){
                 return chatMessageTypeItem;
             }
         }
         return null;
-    }
-
-    public Integer getChatMessageType() {
-        return chatMessageType;
-    }
-
-    public void setChatMessageType(Integer chatMessageType) {
-        this.chatMessageType = chatMessageType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

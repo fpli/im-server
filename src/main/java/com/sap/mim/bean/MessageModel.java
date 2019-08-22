@@ -9,8 +9,10 @@ public class MessageModel implements Externalizable {
 
     private static final long serialVersionUID = -8423649759924603235L;
 
-    private Long        msgId;
+    private Long           msgId;
     private MessageType messageType;
+
+
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -41,13 +43,5 @@ public class MessageModel implements Externalizable {
 
     public void setMsgId(Long msgId) {
         this.msgId = msgId;
-    }
-
-    @Override
-    public String toString() {
-        return "MessageModel{" +
-                "msgId=" + msgId +
-                ", messageType=" + messageType +
-                '}';
     }
 }
