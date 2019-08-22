@@ -41,19 +41,16 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         super.channelRegistered(ctx);
-        System.out.println("ChildNioSocketChannelHandler----"+"channelRegistered"+ctx.channel().id());
     }
 
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         super.channelUnregistered(ctx);
-        System.out.println("ChildNioSocketChannelHandler++++"+"channelUnregistered"+ctx.channel().id());
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        System.out.println("ChildNioSocketChannelHandler---"+"channelActive"+ctx.channel().id());
         SmartSIMProtocol response  = new SmartSIMProtocol();
         ACKMessage ackMessage      = new ACKMessage();
         ackMessage.setMessageType(MessageType.ACK);
@@ -71,7 +68,6 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
-        System.out.println("ChildNioSocketChannelHandler+++"+"channelInactive"+ctx.channel().id());
     }
 }
 
