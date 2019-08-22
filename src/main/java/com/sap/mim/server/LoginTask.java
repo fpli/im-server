@@ -1,9 +1,6 @@
 package com.sap.mim.server;
 
-import com.sap.mim.bean.Account;
-import com.sap.mim.bean.LoginMessage;
-import com.sap.mim.bean.LoginResultMessage;
-import com.sap.mim.bean.MessageType;
+import com.sap.mim.bean.*;
 import com.sap.mim.net.ConstantValue;
 import com.sap.mim.net.SmartSIMProtocol;
 import com.sap.mim.util.MessageIdGenerator;
@@ -30,12 +27,11 @@ public class LoginTask implements Runnable {
 
     @Override
     public void run() {
-        Account account = new Account();
-        account.setAccount(loginMessage.getAccountNo());
-        account.setPassword(loginMessage.getPassword());
+        Account account = loginMessage.getAccount();
         LoginResultMessage loginResultMessage = new LoginResultMessage();
         loginResultMessage.setMsgId(MessageIdGenerator.getMsgId());
         loginResultMessage.setMessageType(MessageType.S2C);
+        loginResultMessage.setS2CMessageType(S2CMessageType.S_2_C_LOGIN_RESULT);
         boolean isExisted =  true;
         if (isExisted){
             Connector connector = new Connector();

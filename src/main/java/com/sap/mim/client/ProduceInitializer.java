@@ -16,6 +16,6 @@ public class ProduceInitializer extends ChannelInitializer<NioSocketChannel> {
         // 添加自定义协议的编解码工具
         pi.addLast(new SmartSIMEncoder());
         pi.addLast(new SmartSIMDecoder());
-        pi.addLast("handler", new ClientBizInboundHandler());
+        pi.addLast(new ClientBizInboundHandler());
     }
 }

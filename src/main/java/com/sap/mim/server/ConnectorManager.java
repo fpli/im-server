@@ -31,7 +31,7 @@ public class ConnectorManager {
                 for(;;){
                     ConnectorManager.tuisong();
                     try {
-                        Thread.sleep(60000 * 5);
+                        Thread.sleep(60000 * 2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -50,7 +50,7 @@ public class ConnectorManager {
             try {
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.setMsgId(MessageIdGenerator.getMsgId());
-                chatMessage.setMessageType(MessageType.C2S);
+                chatMessage.setMessageType(MessageType.S2C);
                 chatMessage.setChatMessageType(ChatMessageType.TEXT_MESSAGE);
                 chatMessage.setSenderId(1001);
                 chatMessage.setReceiverId(1002);

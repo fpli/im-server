@@ -1,9 +1,6 @@
 package com.sap.mim.client;
 
-import com.sap.mim.bean.ChatMessage;
-import com.sap.mim.bean.ChatMessageType;
-import com.sap.mim.bean.LoginMessage;
-import com.sap.mim.bean.MessageType;
+import com.sap.mim.bean.*;
 import com.sap.mim.util.MessageIdGenerator;
 
 public class ClientStart {
@@ -13,8 +10,10 @@ public class ClientStart {
         LoginMessage loginMessage = new LoginMessage();
         loginMessage.setMessageType(MessageType.C2S);
         loginMessage.setMsgId(MessageIdGenerator.getMsgId());
-        loginMessage.setAccountNo("ggggggggggg");
-        loginMessage.setPassword("123456");
+        Account account = new Account();
+        account.setAccount("123456");
+        account.setPassword("111111");
+        loginMessage.setAccount(account);
         NetService.getNetService().sendMessageModel(loginMessage);
         System.out.println("消息发送--->"+123456);
 
