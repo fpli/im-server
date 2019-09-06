@@ -47,8 +47,7 @@ public class UserDao {
 	 */
 	public static int insertInfo(Account account) {
 		String sql0 = "use test";
-		String sql1 = "insert into account (account,name,photo,birthday,password,gender)"
-				+ " values(?,?,?,?,?,?)";
+		String sql1 = "insert into account (account, name, photo, birthday, password, gender)" + " values(?,?,?,?,?,?)";
 		Connection con = DBPool.getConnection();
 		try {
 			con.setAutoCommit(false);
