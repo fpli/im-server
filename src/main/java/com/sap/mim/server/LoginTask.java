@@ -1,5 +1,6 @@
 package com.sap.mim.server;
 
+import com.sap.mim.DataBase.AccountManager;
 import com.sap.mim.bean.*;
 import com.sap.mim.net.ConstantValue;
 import com.sap.mim.net.SmartSIMProtocol;
@@ -32,7 +33,8 @@ public class LoginTask implements Runnable {
         loginResultMessage.setMsgId(MessageIdGenerator.getMsgId());
         loginResultMessage.setMessageType(MessageType.S2C);
         loginResultMessage.setS2CMessageType(S2CMessageType.S_2_C_LOGIN_RESULT);
-        boolean isExisted =  true;
+        account = AccountManager.login(account);
+        boolean isExisted = account != null ? true : false;
         if (isExisted){
             Connector connector = new Connector();
             connector.setAccount(account);
