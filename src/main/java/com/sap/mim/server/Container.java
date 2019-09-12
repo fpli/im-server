@@ -42,7 +42,7 @@ public class Container {
         sendedChatMessageQueue.putIfAbsent(chatMessage.getMsgId(), chatMessage);
     }
 
-    public static void remoceSendChatMessage(Long msgId){
+    public static void removeSendChatMessage(Long msgId){
         ChatMessage chatMessage = sendedChatMessageQueue.remove(msgId);
         chatMessage = null;
     }

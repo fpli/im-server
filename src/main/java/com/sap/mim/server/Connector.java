@@ -20,7 +20,7 @@ public class Connector {
 
     private NioSocketChannel nioSocketChannel;
 
-    public void sentChatMessage(ChatMessage chatMessage) throws IOException {
+    public void sendChatMessage(ChatMessage chatMessage) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(chatMessage);

@@ -28,11 +28,13 @@ public class Engine {
             ACKMessage ackMessage = (ACKMessage) messageModel;
             Long ackmsgId = ackMessage.getMsgId();
             // 表示客户端接收成功，服务端可以清理这个消息
-            Container.remoceSendChatMessage(ackmsgId);
+            Container.removeSendChatMessage(ackmsgId);
         }
         // 服务端接收到客户端的聊天消息
         if (messageModel instanceof ChatMessage){
             ChatMessage chatMessage = (ChatMessage) messageModel;
+            String msg = new String(chatMessage.getContent());
+            System.out.println(msg);
             System.out.println(chatMessage);
             HandleChatMessageTask handleChatMessageTask = new HandleChatMessageTask(chatMessage);
             executorService.submit(handleChatMessageTask);

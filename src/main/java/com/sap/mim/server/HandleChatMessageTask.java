@@ -26,7 +26,7 @@ public class HandleChatMessageTask implements Runnable{
                 Container.receiveChatMessage(chatMessage);
             } else {
                 Container.receiveSendChatMessage(chatMessage);
-                connector.sentChatMessage(chatMessage);
+                connector.sendChatMessage(chatMessage);
             }
         } catch (IOException|InterruptedException e) {
             e.printStackTrace();
