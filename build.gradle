@@ -13,9 +13,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.35'
-    compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.3'
-    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.1'
     compile group: 'io.netty', name: 'netty-all', version: '4.1.16.Final'
 }
