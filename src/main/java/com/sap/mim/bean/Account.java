@@ -1,8 +1,3 @@
-/**
- * 文件名：Account.java
- * 时间：2015年5月9日上午10:23:19
- * 作者：修维康
- */
 package com.sap.mim.bean;
 
 import java.io.Serializable;
@@ -10,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 类名：User 说明：账户对象
+ * 类名：Account 说明：账户对象
  */
 public class Account implements Serializable {
 

@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
 public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSIMProtocol> {
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         ACKMessage ackMessage = new ACKMessage();
         ackMessage.setMessageType(MessageType.ACK);
         ackMessage.setMsgId(MessageIdGenerator.getMsgId());
@@ -32,7 +32,7 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
             ACKMessage ackMessage = (ACKMessage) message;
             Long msgId            = ackMessage.getMsgId();
             // 处理客户端已发送的消息
-            System.out.println(ackMessage);
+            System.out.println(ackMessage.toString() + msgId);
         }
 
         if (message instanceof ChatMessage){
@@ -51,7 +51,7 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }
