@@ -17,11 +17,11 @@ import java.util.Random;
 public class LoginTask implements Runnable {
 
     private ChannelHandlerContext ctx;
-    private LoginMessage          loginMessage;
+    private LoginMessage loginMessage;
 
 
     public LoginTask(ChannelHandlerContext ctx, LoginMessage loginMessage) {
-        this.ctx          = ctx;
+        this.ctx = ctx;
         this.loginMessage = loginMessage;
     }
 
@@ -35,7 +35,7 @@ public class LoginTask implements Runnable {
         loginResultMessage.setS2CMessageType(S2CMessageType.S_2_C_LOGIN_RESULT);
         account = AccountManager.login(account);
         boolean isExisted = account != null ? true : false;
-        if (isExisted){
+        if (isExisted) {
             Connector connector = new Connector();
             connector.setAccount(account);
             connector.setNioSocketChannel((NioSocketChannel) ctx.channel());
@@ -54,9 +54,9 @@ public class LoginTask implements Runnable {
         }
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(loginResultMessage);
-            SmartSIMProtocol response  = new SmartSIMProtocol();
+            SmartSIMProtocol response = new SmartSIMProtocol();
             response.setHead_data(ConstantValue.HEAD_DATA);
             byte[] data = byteArrayOutputStream.toByteArray();
             response.setContentLength(data.length);

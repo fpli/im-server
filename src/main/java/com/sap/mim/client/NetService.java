@@ -31,10 +31,10 @@ public class NetService {
     private NetService() {
     }
 
-    public static NetService getNetService(){
-        if (null == netService){
-            synchronized (NetService.class){
-                if (null == netService){
+    public static NetService getNetService() {
+        if (null == netService) {
+            synchronized (NetService.class) {
+                if (null == netService) {
                     netService = new NetService();
                     netService.build();
                 }
@@ -45,7 +45,6 @@ public class NetService {
 
     /**
      * 连接服务器
-     *
      */
     public void build() {
         // 配置客户端NIO线程组
@@ -53,9 +52,9 @@ public class NetService {
         // 客户端辅助启动类 对客户端配置
         Bootstrap strap = new Bootstrap();
         strap.group(group)//
-        .channel(NioSocketChannel.class)//
-        .option(ChannelOption.TCP_NODELAY, true)//
-        .option(ChannelOption.SO_KEEPALIVE, true);
+                .channel(NioSocketChannel.class)//
+                .option(ChannelOption.TCP_NODELAY, true)//
+                .option(ChannelOption.SO_KEEPALIVE, true);
 
         poolMap = new AbstractChannelPoolMap<InetSocketAddress, SimpleChannelPool>() {
             @Override
@@ -66,7 +65,7 @@ public class NetService {
 
     }
 
-    public void sendMessageModel(MessageModel messageModel){
+    public void sendMessageModel(MessageModel messageModel) {
         final SimpleChannelPool pool = poolMap.get(remoteAddress);
         Future<Channel> f = pool.acquire();
         f.addListener((FutureListener<Channel>) f1 -> {
@@ -75,7 +74,7 @@ public class NetService {
                 System.out.println(ch.id());
                 // 获得要发送信息的字节数组
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
                 objectOutputStream.writeObject(messageModel);
                 byte[] content = byteArrayOutputStream.toByteArray();
                 SmartSIMProtocol request = new SmartSIMProtocol();

@@ -23,12 +23,12 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         Container.receiveSmartSIMProtocolMsg(ctx, msg);
-        SmartSIMProtocol response  = new SmartSIMProtocol();
-        ACKMessage ackMessage      = new ACKMessage();
+        SmartSIMProtocol response = new SmartSIMProtocol();
+        ACKMessage ackMessage = new ACKMessage();
         ackMessage.setMessageType(MessageType.ACK);
         ackMessage.setMsgId(12L);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos     = new ObjectOutputStream(baos);
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(ackMessage);
         response.setHead_data(ConstantValue.HEAD_DATA);
         byte[] data = baos.toByteArray();
@@ -51,12 +51,12 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        SmartSIMProtocol response  = new SmartSIMProtocol();
-        ACKMessage ackMessage      = new ACKMessage();
+        SmartSIMProtocol response = new SmartSIMProtocol();
+        ACKMessage ackMessage = new ACKMessage();
         ackMessage.setMessageType(MessageType.ACK);
         ackMessage.setMsgId(12L);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos     = new ObjectOutputStream(baos);
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(ackMessage);
         response.setHead_data(ConstantValue.HEAD_DATA);
         byte[] data = baos.toByteArray();

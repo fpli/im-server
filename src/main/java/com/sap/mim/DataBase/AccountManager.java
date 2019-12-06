@@ -36,12 +36,12 @@ public class AccountManager {
         friendList.add(account1);
     }
 
-    public static Account login(Account account){
-        if (account == null || account.getAccount() == null || account.getPassword() == null){
+    public static Account login(Account account) {
+        if (account == null || account.getAccount() == null || account.getPassword() == null) {
             return null;
         }
         Account account1 = accounts.get(account.getAccount());
-        if (account1.getPassword().equals(account.getPassword())){
+        if (account1.getPassword().equals(account.getPassword())) {
             account = account1;
         } else {
             account = null;

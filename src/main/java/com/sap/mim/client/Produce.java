@@ -44,7 +44,7 @@ public class Produce {
                 account.setPassword("111111");
                 loginMessage.setAccount(account);
                 sendMessageModel(loginMessage);
-                System.out.println("消息发送--->"+123456);
+                System.out.println("消息发送--->" + 123456);
                 Thread.currentThread().sleep(random.nextInt(10) * 1000);
             }
         } finally {
@@ -57,10 +57,10 @@ public class Produce {
         new Produce("localhost", 5000).run();
     }
 
-    public void sendMessageModel(MessageModel messageModel){
+    public void sendMessageModel(MessageModel messageModel) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(messageModel);
             byte[] content = byteArrayOutputStream.toByteArray();
             SmartSIMProtocol request = new SmartSIMProtocol();

@@ -16,22 +16,22 @@ public class Engine {
 
     private static final ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-    public static void handleMessage(ChannelHandlerContext ctx, MessageModel messageModel){
-        if (messageModel instanceof LoginMessage){
+    public static void handleMessage(ChannelHandlerContext ctx, MessageModel messageModel) {
+        if (messageModel instanceof LoginMessage) {
             LoginMessage loginMessage = (LoginMessage) messageModel;
             System.out.println(loginMessage);
-            LoginTask loginTask       = new LoginTask(ctx, loginMessage);
+            LoginTask loginTask = new LoginTask(ctx, loginMessage);
             executorService.submit(loginTask);
         }
 
-        if (messageModel instanceof ACKMessage){
+        if (messageModel instanceof ACKMessage) {
             ACKMessage ackMessage = (ACKMessage) messageModel;
             Long ackmsgId = ackMessage.getMsgId();
             // 表示客户端接收成功，服务端可以清理这个消息
             Container.removeSendChatMessage(ackmsgId);
         }
         // 服务端接收到客户端的聊天消息
-        if (messageModel instanceof ChatMessage){
+        if (messageModel instanceof ChatMessage) {
             ChatMessage chatMessage = (ChatMessage) messageModel;
             String msg = new String(chatMessage.getContent());
             System.out.println(msg);

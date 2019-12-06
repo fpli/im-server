@@ -15,7 +15,7 @@ public class ClientStart {
         account.setPassword("111111");
         loginMessage.setAccount(account);
         NetService.getNetService().sendMessageModel(loginMessage);
-        System.out.println("消息发送--->"+123456);
+        System.out.println("消息发送--->" + 123456);
 
 
         ChatMessage chatMessage = new ChatMessage();
@@ -27,7 +27,7 @@ public class ClientStart {
         chatMessage.setSendTime("2019年8月21日 下午13:50:23");
         chatMessage.setContent("通信回话消息".getBytes());
         NetService.getNetService().sendMessageModel(chatMessage);
-        System.out.println("通话消息发送--->"+123456);
+        System.out.println("通话消息发送--->" + 123456);
 
     }
 

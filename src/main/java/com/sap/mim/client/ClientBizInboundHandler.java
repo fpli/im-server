@@ -26,16 +26,16 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
     protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         byte[] data = msg.getContent();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
-        ObjectInputStream objectInputStream       = new ObjectInputStream(byteArrayInputStream);
-        Object message                            = objectInputStream.readObject();
-        if (message instanceof ACKMessage){
+        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        Object message = objectInputStream.readObject();
+        if (message instanceof ACKMessage) {
             ACKMessage ackMessage = (ACKMessage) message;
-            Long msgId            = ackMessage.getMsgId();
+            Long msgId = ackMessage.getMsgId();
             // 处理客户端已发送的消息
             System.out.println(ackMessage.toString() + msgId);
         }
 
-        if (message instanceof ChatMessage){
+        if (message instanceof ChatMessage) {
             ChatMessage chatMessage = (ChatMessage) message;
             System.out.println(chatMessage);
             ACKMessage ackMessage = new ACKMessage();
@@ -44,8 +44,8 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
             NetService.getNetService().sendMessageModel(ackMessage);
         }
 
-        if (message instanceof LoginResultMessage){
-            LoginResultMessage loginResultMessage = (LoginResultMessage)message;
+        if (message instanceof LoginResultMessage) {
+            LoginResultMessage loginResultMessage = (LoginResultMessage) message;
             System.out.println(loginResultMessage);
         }
     }

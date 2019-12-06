@@ -22,7 +22,7 @@ public class Connector {
 
     public void sendChatMessage(ChatMessage chatMessage) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream       = new ObjectOutputStream(byteArrayOutputStream);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(chatMessage);
         byte[] content = byteArrayOutputStream.toByteArray();
         SmartSIMProtocol response = new SmartSIMProtocol();

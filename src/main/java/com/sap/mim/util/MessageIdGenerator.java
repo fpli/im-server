@@ -6,7 +6,7 @@ public class MessageIdGenerator {
 
     private transient static final AtomicLong msgIdGenerotor = new AtomicLong();
 
-    public static final long getMsgId(){
+    public static final long getMsgId() {
         return msgIdGenerotor.incrementAndGet();
     }
 }

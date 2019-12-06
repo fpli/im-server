@@ -16,7 +16,7 @@ public class Container {
     private static final ConcurrentMap<Integer, LinkedBlockingQueue<ChatMessage>> waitForSendQueue = new ConcurrentHashMap<>();
     private static final ConcurrentMap<Long, ChatMessage> sendedChatMessageQueue = new ConcurrentHashMap<>();
 
-    public static void receiveSmartSIMProtocolMsg(ChannelHandlerContext ctx, SmartSIMProtocol smartSIMProtocol){
+    public static void receiveSmartSIMProtocolMsg(ChannelHandlerContext ctx, SmartSIMProtocol smartSIMProtocol) {
         try {
             messageQueue.put(smartSIMProtocol);
             AnalysisSmartSIMProtocolTask analysisSmartSIMProtocolTask = new AnalysisSmartSIMProtocolTask(ctx, smartSIMProtocol);
@@ -27,22 +27,22 @@ public class Container {
     }
 
 
-    public static void receiveChatMessage(ChatMessage chatMessage) throws InterruptedException{
-       if (waitForSendQueue.containsKey(chatMessage.getReceiverId())) {
-           waitForSendQueue.get(chatMessage.getReceiverId()).put(chatMessage);
-       } else {
-           LinkedBlockingQueue<ChatMessage> linkedBlockingQueue = new LinkedBlockingQueue<>();
-           waitForSendQueue.putIfAbsent(chatMessage.getReceiverId(), linkedBlockingQueue);
-           linkedBlockingQueue.put(chatMessage);
-       }
+    public static void receiveChatMessage(ChatMessage chatMessage) throws InterruptedException {
+        if (waitForSendQueue.containsKey(chatMessage.getReceiverId())) {
+            waitForSendQueue.get(chatMessage.getReceiverId()).put(chatMessage);
+        } else {
+            LinkedBlockingQueue<ChatMessage> linkedBlockingQueue = new LinkedBlockingQueue<>();
+            waitForSendQueue.putIfAbsent(chatMessage.getReceiverId(), linkedBlockingQueue);
+            linkedBlockingQueue.put(chatMessage);
+        }
     }
 
 
-    public static void receiveSendChatMessage(ChatMessage chatMessage){
+    public static void receiveSendChatMessage(ChatMessage chatMessage) {
         sendedChatMessageQueue.putIfAbsent(chatMessage.getMsgId(), chatMessage);
     }
 
-    public static void removeSendChatMessage(Long msgId){
+    public static void removeSendChatMessage(Long msgId) {
         ChatMessage chatMessage = sendedChatMessageQueue.remove(msgId);
         chatMessage = null;
     }
