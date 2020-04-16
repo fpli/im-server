@@ -22,7 +22,7 @@ import java.net.InetSocketAddress;
 
 public class NetService {
 
-    private static NetService netService;
+    private static volatile NetService netService;
 
     private static final InetSocketAddress remoteAddress = new InetSocketAddress("127.0.0.1", 5000);
 
@@ -58,8 +58,8 @@ public class NetService {
 
         poolMap = new AbstractChannelPoolMap<InetSocketAddress, SimpleChannelPool>() {
             @Override
-            protected SimpleChannelPool newPool(InetSocketAddress key) {
-                return new FixedChannelPool(strap.remoteAddress(key), new NettyChannelPoolHandler(), 2);
+            protected SimpleChannelPool newPool(InetSocketAddress remoteAddress) {
+                return new FixedChannelPool(strap.remoteAddress(remoteAddress), new NettyChannelPoolHandler(), 2);
             }
         };
 
