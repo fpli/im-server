@@ -24,7 +24,7 @@ public class NettyChannelPoolHandler implements ChannelPoolHandler {
         System.out.println("channelCreated. Channel ID: " + ch.id());
         NioSocketChannel nioSocketChannel = (NioSocketChannel) ch;
         ClientBizInboundHandler clientBizInboundHandler = new ClientBizInboundHandler();
-        nioSocketChannel.pipeline().addLast(new IdleStateHandler(3, 7, 5));
+        nioSocketChannel.pipeline().addLast(new IdleStateHandler(0, 10, 0));
         // 添加自定义协议的编解码工具
         nioSocketChannel.pipeline().addLast(new SmartSIMEncoder());
         nioSocketChannel.pipeline().addLast(new SmartSIMDecoder());
