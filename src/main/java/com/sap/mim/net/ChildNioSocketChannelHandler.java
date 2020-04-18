@@ -18,6 +18,7 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         ctx.close();
+        System.out.println("客户端断开连接");
     }
 
     @Override

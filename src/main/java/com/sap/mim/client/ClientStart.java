@@ -9,6 +9,7 @@ public class ClientStart {
 
         LoginMessage loginMessage = new LoginMessage();
         loginMessage.setMessageType(MessageType.C2S);
+        loginMessage.setC2SMessageType(C2SMessageType.C_2_S_LOGIN);
         loginMessage.setMsgId(MessageIdGenerator.getMsgId());
         Account account = new Account();
         account.setAccount("123456");
