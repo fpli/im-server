@@ -50,7 +50,8 @@ public class NettyClient {
                     .option(ChannelOption.SO_KEEPALIVE, true)
             .handler(clientChannelInitializer);
 
-            bootstrap.connect("127.0.0.1", 5000).sync();
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 5000).sync();
+            //channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

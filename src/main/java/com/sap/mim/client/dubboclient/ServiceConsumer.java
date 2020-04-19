@@ -35,5 +35,7 @@ public class ServiceConsumer {
         ServiceI serviceBean = (ServiceI) nettyClient.getBean(ServiceI.class);
         Object result  = serviceBean.invoke(request);
         System.out.println(result);
+        System.out.println(serviceBean.invoke(request));
+        System.out.println(serviceBean.invoke(request));
     }
 }
