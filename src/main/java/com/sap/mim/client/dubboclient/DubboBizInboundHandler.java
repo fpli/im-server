@@ -20,11 +20,6 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        //this.ctx = null;
-    }
-
-    @Override
     protected synchronized void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         response = msg;
         notify();
@@ -42,9 +37,4 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
         this.request = request;
     }
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
-        cause.printStackTrace();
-    }
 }

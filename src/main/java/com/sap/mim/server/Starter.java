@@ -20,12 +20,12 @@ public class Starter {
             // 服务器辅助启动类配置
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    .option(ChannelOption.SO_BACKLOG, 128)// 设置线程队列等待连接的个数
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(new ChildChannelInitializer())
                     .childOption(ChannelOption.TCP_NODELAY, true)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true);
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)//设置保持活动连接状态
+                    .childHandler(new ChildChannelInitializer());
             // 绑定端口 同步等待绑定成功
             ChannelFuture f = b.bind(5000).sync(); // (7)
             // 等到服务端监听端口关闭

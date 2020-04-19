@@ -15,13 +15,6 @@ import java.io.ObjectOutputStream;
 public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<SmartSIMProtocol> {
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
-        System.out.println("客户端断开连接");
-    }
-
-    @Override
     protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
         Container.receiveSmartSIMProtocolMsg(ctx, msg);
         SmartSIMProtocol response = new SmartSIMProtocol();
@@ -36,17 +29,6 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         response.setContentLength(data.length);
         response.setContent(data);
         ctx.channel().writeAndFlush(response);
-    }
-
-
-    @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        super.channelRegistered(ctx);
-    }
-
-    @Override
-    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-        super.channelUnregistered(ctx);
     }
 
     @Override
@@ -66,9 +48,5 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         ctx.channel().writeAndFlush(response);
     }
 
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
-    }
 }
 

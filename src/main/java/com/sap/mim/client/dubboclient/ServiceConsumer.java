@@ -33,8 +33,7 @@ public class ServiceConsumer {
         request.setContentLength(content.length);
         request.setContent(content);
         ServiceI serviceBean = (ServiceI) nettyClient.getBean(ServiceI.class);
-        //Object result  = serviceBean.invoke("param1");
-        Object result2  = serviceBean.invoke(request);
-        System.out.println(result2);
+        Object result  = serviceBean.invoke(request);
+        System.out.println(result);
     }
 }
