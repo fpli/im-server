@@ -33,18 +33,22 @@ public class NettyClient {
 
     private static void init() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        Bootstrap bootstrap = new Bootstrap();
-        handler = new DubboBizInboundHandler();
-        ClientChannelInitializer clientChannelInitializer = new ClientChannelInitializer(handler);
-        bootstrap.group(workerGroup);
-        bootstrap.channel(NioSocketChannel.class)//
-                .option(ChannelOption.TCP_NODELAY, true)//
-                .option(ChannelOption.SO_KEEPALIVE, true)
-                .handler(clientChannelInitializer);
         try {
-            bootstrap.connect("127.0.0.1", 5000).sync();
+            Bootstrap bootstrap = new Bootstrap();
+            handler = new DubboBizInboundHandler();
+            ClientChannelInitializer clientChannelInitializer = new ClientChannelInitializer(handler);
+            bootstrap.group(workerGroup);
+            bootstrap.channel(NioSocketChannel.class)//
+                    .option(ChannelOption.TCP_NODELAY, true)//
+                    .option(ChannelOption.SO_KEEPALIVE, true)
+                    .handler(clientChannelInitializer);
+
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 5000).sync();
+            //channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            //workerGroup.shutdownGracefully();
         }
     }
 }
