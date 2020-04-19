@@ -19,43 +19,32 @@ public class NettyClient {
 
     private static DubboBizInboundHandler handler;
 
-    private static ExecutorService executorService = new ThreadPoolExecutor(2,5,3, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
+    private static ExecutorService executorService = new ThreadPoolExecutor(2, 5, 3, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
 
-    private static int count;
-
-    public NettyClient() {
-
-    }
-
-    public Object getBean(Class<?> serviceClass){
+    public Object getBean(Class<?> serviceClass) {
         return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[]{serviceClass}, (proxy, method, args) -> {
-            if (handler==null){
+            if (handler == null) {
                 init();
             }
-            //System.out.println("count="+ (++count));
             handler.setRequest(args[0]);
             return executorService.submit(handler).get();
         });
     }
 
-    private static void init(){
+    private static void init() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
+        Bootstrap bootstrap = new Bootstrap();
+        handler = new DubboBizInboundHandler();
+        ClientChannelInitializer clientChannelInitializer = new ClientChannelInitializer(handler);
+        bootstrap.group(workerGroup);
+        bootstrap.channel(NioSocketChannel.class)//
+                .option(ChannelOption.TCP_NODELAY, true)//
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .handler(clientChannelInitializer);
         try {
-            Bootstrap bootstrap = new Bootstrap();
-            handler = new DubboBizInboundHandler();
-            ClientChannelInitializer clientChannelInitializer = new ClientChannelInitializer(handler);
-            bootstrap.group(workerGroup);
-            bootstrap.channel(NioSocketChannel.class)//
-                    .option(ChannelOption.TCP_NODELAY, true)//
-                    .option(ChannelOption.SO_KEEPALIVE, true)
-            .handler(clientChannelInitializer);
-
-            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 5000).sync();
-            //channelFuture.channel().closeFuture().sync();
+            bootstrap.connect("127.0.0.1", 5000).sync();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            //workerGroup.shutdownGracefully();
         }
     }
 }
