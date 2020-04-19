@@ -14,7 +14,7 @@ public class Starter {
 
     public static void main(String[] args) throws Exception {
         // 配置NIO线程组
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // 服务器辅助启动类配置
