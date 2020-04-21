@@ -7,7 +7,8 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {
 
@@ -15,14 +16,12 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     // GlobalEventExecutor.INSTANCE是一个全局事件执行器，是一个单例
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     // 表示连接建立,一旦连接，第一个被执行 将channel加入到channelGroup
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
         // 将客户端加入的信息推送给其他客户端
-        channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + "进入聊天\n");
+        channelGroup.writeAndFlush("[客户端]" + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.now()) + channel.remoteAddress() + "进入聊天\n");
         channelGroup.add(channel);
     }
 
@@ -32,7 +31,7 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
         Channel channel = ctx.channel();
         // 将客户端加入的信息推送给其他客户端
         channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + "离开了\n");
-        System.out.println("channelGroup size:\r" + channelGroup.size());
+        System.out.println("channelGroup size:\t" + channelGroup.size());
     }
 
     // 表示channel处于活动状态，提示用户上线
@@ -58,5 +57,11 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
                 channel.writeAndFlush("[自己]发送了消息" + msg + "\n");
             }
         });
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        ctx.close();
+        //super.exceptionCaught(ctx, cause);
     }
 }
