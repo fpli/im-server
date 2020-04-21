@@ -19,6 +19,7 @@ public class GroupChatServer {
     // 编写run方法，处理客户端请求
     public void run() throws Exception {
         // 创建两个线程组
+        //bossGroup 线程池则只是在 Bind 某个端口后，获得其中一个线程作为 MainReactor，专门处理端口的 Accept 事件，每个端口对应一个 Boss 线程。
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
