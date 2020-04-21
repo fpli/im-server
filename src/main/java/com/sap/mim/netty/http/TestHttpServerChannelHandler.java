@@ -13,7 +13,7 @@ public class TestHttpServerChannelHandler extends SimpleChannelInboundHandler<Ht
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
-        if (msg instanceof HttpRequest){
+        if (msg instanceof HttpRequest) {
             System.out.println(msg.getClass());
             System.out.println(ctx.channel().remoteAddress());
 

@@ -7,7 +7,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class TestHttpServer {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
