@@ -22,7 +22,7 @@ public class TestHttpServerChannelHandler extends SimpleChannelInboundHandler<Ht
             System.out.println(uri.getPath());
             ByteBuf content = Unpooled.copiedBuffer("hello , i am server 服务期短", CharsetUtil.UTF_8);
 
-            HttpResponse httpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
+            FullHttpResponse httpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
 
             httpResponse.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
             httpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());

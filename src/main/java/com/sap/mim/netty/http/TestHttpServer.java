@@ -10,7 +10,7 @@ import io.netty.handler.logging.LoggingHandler;
 public class TestHttpServer {
 
     public static void main(String[] args) throws Exception {
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {

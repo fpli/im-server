@@ -2,7 +2,6 @@ package com.sap.mim.netty.heartbeat;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
 public class MyServerChannelHandle extends ChannelInboundHandlerAdapter {
@@ -12,7 +11,7 @@ public class MyServerChannelHandle extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             String eventType = "";
-            switch (idleStateEvent.state()){
+            switch (idleStateEvent.state()) {
                 case READER_IDLE:
                     eventType = "读空闲";
                     break;
