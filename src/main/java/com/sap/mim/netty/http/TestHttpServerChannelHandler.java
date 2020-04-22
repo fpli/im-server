@@ -24,7 +24,7 @@ public class TestHttpServerChannelHandler extends SimpleChannelInboundHandler<Ht
 
             FullHttpResponse httpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
 
-            httpResponse.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
+            httpResponse.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain;charset=utf-8");
             httpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
 
             ctx.writeAndFlush(httpResponse);
