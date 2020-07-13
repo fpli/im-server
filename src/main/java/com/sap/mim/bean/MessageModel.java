@@ -9,8 +9,8 @@ public class MessageModel implements Externalizable {
 
     private static final long serialVersionUID = -8423649759924603235L;
 
-    private Long           msgId;
-    private MessageType messageType;
+    private Long            msgId;
+    private MessageTypeEnum messageType;
 
 
 
@@ -23,17 +23,17 @@ public class MessageModel implements Externalizable {
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         msgId       = in.readLong();
-        messageType = MessageType.getMessageTypeById(in.readInt());
+        messageType = MessageTypeEnum.getMessageTypeById(in.readInt());
     }
 
     public MessageModel() {
     }
 
-    public MessageType getMessageType() {
+    public MessageTypeEnum getMessageType() {
         return messageType;
     }
 
-    public void setMessageType(MessageType messageType) {
+    public void setMessageType(MessageTypeEnum messageType) {
         this.messageType = messageType;
     }
 

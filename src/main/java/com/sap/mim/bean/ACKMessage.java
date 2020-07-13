@@ -9,7 +9,7 @@ public class ACKMessage extends MessageModel {
     private static final long serialVersionUID = 8171182601241394597L;
 
     public ACKMessage() {
-        setMessageType(MessageType.ACK);
+        setMessageType(MessageTypeEnum.ACK);
     }
 
     @Override

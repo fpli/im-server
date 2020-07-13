@@ -17,7 +17,7 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         ACKMessage ackMessage = new ACKMessage();
-        ackMessage.setMessageType(MessageType.ACK);
+        ackMessage.setMessageType(MessageTypeEnum.ACK);
         ackMessage.setMsgId(MessageIdGenerator.getMsgId());
         NetService.getNetService().sendMessageModel(ackMessage);
     }
@@ -39,7 +39,7 @@ public class ClientBizInboundHandler extends SimpleChannelInboundHandler<SmartSI
             ChatMessage chatMessage = (ChatMessage) message;
             System.out.println(chatMessage);
             ACKMessage ackMessage = new ACKMessage();
-            ackMessage.setMessageType(MessageType.ACK);
+            ackMessage.setMessageType(MessageTypeEnum.ACK);
             ackMessage.setMsgId(((ChatMessage) message).getMsgId());
             NetService.getNetService().sendMessageModel(ackMessage);
         }

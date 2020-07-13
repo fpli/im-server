@@ -31,8 +31,8 @@ public class LoginTask implements Runnable {
         Account account = loginMessage.getAccount();
         LoginResultMessage loginResultMessage = new LoginResultMessage();
         loginResultMessage.setMsgId(MessageIdGenerator.getMsgId());
-        loginResultMessage.setMessageType(MessageType.S2C);
-        loginResultMessage.setS2CMessageType(S2CMessageType.S_2_C_LOGIN_RESULT);
+        loginResultMessage.setMessageType(MessageTypeEnum.S2C);
+        loginResultMessage.setS2CMessageTypeEnum(S2CMessageTypeEnum.S_2_C_LOGIN_RESULT);
         account = AccountManager.login(account);
         boolean isExisted = account != null ? true : false;
         if (isExisted) {

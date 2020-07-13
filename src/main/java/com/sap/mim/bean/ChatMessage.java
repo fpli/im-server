@@ -12,7 +12,7 @@ public class ChatMessage extends MessageModel {
     private int             senderId;        // 发送方id
     private int             receiverId;      // 接收方id
     private String          sendTime;        // 发送时刻
-    private ChatMessageType chatMessageType; // 消息类型:文本消息|语音消息|图片消息
+    private ChatMessageTypeEnum chatMessageTypeEnum; // 消息类型:文本消息|语音消息|图片消息
     private byte[]          content;         // 消息内容
 
     public ChatMessage() {
@@ -24,7 +24,7 @@ public class ChatMessage extends MessageModel {
         out.writeInt(senderId);
         out.writeInt(receiverId);
         out.writeUTF(sendTime);
-        out.writeInt(chatMessageType.getChatMessageType());
+        out.writeInt(chatMessageTypeEnum.getChatMessageType());
         out.writeObject(content);
     }
 
@@ -34,7 +34,7 @@ public class ChatMessage extends MessageModel {
         senderId        = in.readInt();
         receiverId      = in.readInt();
         sendTime        = in.readUTF();
-        chatMessageType = ChatMessageType.getChatMessageTypeByChatMessageType(in.readInt());
+        chatMessageTypeEnum = ChatMessageTypeEnum.getChatMessageTypeByChatMessageType(in.readInt());
         content         = (byte[]) in.readObject();
     }
 
@@ -62,12 +62,12 @@ public class ChatMessage extends MessageModel {
         this.sendTime = sendTime;
     }
 
-    public ChatMessageType getChatMessageType() {
-        return chatMessageType;
+    public ChatMessageTypeEnum getChatMessageTypeEnum() {
+        return chatMessageTypeEnum;
     }
 
-    public void setChatMessageType(ChatMessageType chatMessageType) {
-        this.chatMessageType = chatMessageType;
+    public void setChatMessageTypeEnum(ChatMessageTypeEnum chatMessageTypeEnum) {
+        this.chatMessageTypeEnum = chatMessageTypeEnum;
     }
 
     public byte[] getContent() {

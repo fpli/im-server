@@ -1,6 +1,6 @@
 package com.sap.mim.bean;
 
-public enum ChatMessageType {
+public enum ChatMessageTypeEnum {
 
     TEXT_MESSAGE(1, "TEXT_MESSAGE"),
     VOICE_MESSAGE(2, "VOICE_MESSAGE"),
@@ -10,15 +10,15 @@ public enum ChatMessageType {
 
     private String  description;
 
-    ChatMessageType(Integer chatMessageType, String description) {
+    ChatMessageTypeEnum(Integer chatMessageType, String description) {
         this.chatMessageType = chatMessageType;
         this.description = description;
     }
 
-    public static ChatMessageType getChatMessageTypeByChatMessageType(Integer chatMessageType){
-        for (ChatMessageType chatMessageTypeItem : values()){
-            if (chatMessageTypeItem.chatMessageType.equals(chatMessageType)){
-                return chatMessageTypeItem;
+    public static ChatMessageTypeEnum getChatMessageTypeByChatMessageType(Integer chatMessageType){
+        for (ChatMessageTypeEnum chatMessageTypeEnumItem : values()){
+            if (chatMessageTypeEnumItem.chatMessageType.equals(chatMessageType)){
+                return chatMessageTypeEnumItem;
             }
         }
         return null;

@@ -11,17 +11,17 @@ public class Account implements Serializable {
 
 	private static final long serialVersionUID = -1086962731178609581L;
 
-	private int     id;            // 用户id
-	private String  account;       // 用户账号
-	private String  userName;      // 用户名称
-	private String  password;      // 用户密码
-	private Date    birthday;      // 用户出生日期
-	private int     gender;        // 用户性别:0代表女生 1代表男生 2未知
-	private boolean isOnline;      // 当前是否在线
-	private String  location;      // 用户位置
-	private byte[]  photo;		   // 头像
-	private int     age;           // 用户年龄
-	private String  userBriefIntro;// 用户个性签名
+	private int     	id;            // 用户id
+	private String  	account;       // 用户账号
+	private String  	userName;      // 用户名称
+	private String  	password;      // 用户密码
+	private Date    	birthday;      // 用户出生日期
+	private int     	gender;        // 用户性别:0代表女生 1代表男生 2未知
+	private boolean 	isOnline;      // 当前是否在线
+	private String  	location;      // 用户位置
+	private byte[]  	photo;		   // 头像
+	private int     	age;           // 用户年龄
+	private String  	userBriefIntro;// 用户个性签名
 
 	private List<Account> friendList;// 用户好友列表
 

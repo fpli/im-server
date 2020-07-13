@@ -1,9 +1,9 @@
 package com.sap.mim.client.dubboclient;
 
 import com.sap.mim.bean.Account;
-import com.sap.mim.bean.C2SMessageType;
+import com.sap.mim.bean.C2SMessageTypeEnum;
 import com.sap.mim.bean.LoginMessage;
-import com.sap.mim.bean.MessageType;
+import com.sap.mim.bean.MessageTypeEnum;
 import com.sap.mim.net.ConstantValue;
 import com.sap.mim.net.SmartSIMProtocol;
 import com.sap.mim.util.MessageIdGenerator;
@@ -17,8 +17,8 @@ public class ServiceConsumer {
     public static void main(String[] args) throws IOException {
         NettyClient nettyClient = new NettyClient();
         LoginMessage loginMessage = new LoginMessage();
-        loginMessage.setMessageType(MessageType.C2S);
-        loginMessage.setC2SMessageType(C2SMessageType.C_2_S_LOGIN);
+        loginMessage.setMessageType(MessageTypeEnum.C2S);
+        loginMessage.setC2SMessageTypeEnum(C2SMessageTypeEnum.C_2_S_LOGIN);
         loginMessage.setMsgId(MessageIdGenerator.getMsgId());
         Account account = new Account();
         account.setAccount("123456");

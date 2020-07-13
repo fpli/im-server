@@ -11,10 +11,10 @@ import java.util.concurrent.*;
  */
 public class Container {
 
-    private static final LinkedBlockingQueue<SmartSIMProtocol> messageQueue = new LinkedBlockingQueue<>();
-    private static final ExecutorService analysisExecutorService = Executors.newFixedThreadPool(5);
-    private static final ConcurrentMap<Integer, LinkedBlockingQueue<ChatMessage>> waitForSendQueue = new ConcurrentHashMap<>();
-    private static final ConcurrentMap<Long, ChatMessage> sendedChatMessageQueue = new ConcurrentHashMap<>();
+    private static final LinkedBlockingQueue<SmartSIMProtocol>                      messageQueue = new LinkedBlockingQueue<>();
+    private static final ExecutorService                                            analysisExecutorService = Executors.newFixedThreadPool(5);
+    private static final ConcurrentMap<Integer, LinkedBlockingQueue<ChatMessage>>   waitForSendQueue = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Long, ChatMessage>                           sendedChatMessageQueue = new ConcurrentHashMap<>();
 
     public static void receiveSmartSIMProtocolMsg(ChannelHandlerContext ctx, SmartSIMProtocol smartSIMProtocol) {
         try {

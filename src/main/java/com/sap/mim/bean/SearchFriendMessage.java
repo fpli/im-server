@@ -7,20 +7,21 @@ import java.io.ObjectOutput;
 public class SearchFriendMessage extends MessageModel {
 
     private static final long serialVersionUID = 6242907966383961315L;
-    private C2SMessageType c2SMessageType;
-    private int accountNo;
+
+    private C2SMessageTypeEnum c2SMessageTypeEnum;
+    private int             accountNo;
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         super.writeExternal(out);
-        out.writeInt(c2SMessageType.getC2sMessageType());
+        out.writeInt(c2SMessageTypeEnum.getC2sMessageType());
         out.writeInt(accountNo);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         super.readExternal(in);
-        c2SMessageType = C2SMessageType.getC2SMessageTypeById(in.readInt());
+        c2SMessageTypeEnum = C2SMessageTypeEnum.getC2SMessageTypeById(in.readInt());
         accountNo = in.readInt();
     }
 
@@ -35,11 +36,11 @@ public class SearchFriendMessage extends MessageModel {
         this.accountNo = accountNo;
     }
 
-    public C2SMessageType getC2SMessageType() {
-        return c2SMessageType;
+    public C2SMessageTypeEnum getC2SMessageTypeEnum() {
+        return c2SMessageTypeEnum;
     }
 
-    public void setC2SMessageType(C2SMessageType c2SMessageType) {
-        this.c2SMessageType = c2SMessageType;
+    public void setC2SMessageTypeEnum(C2SMessageTypeEnum c2SMessageTypeEnum) {
+        this.c2SMessageTypeEnum = c2SMessageTypeEnum;
     }
 }

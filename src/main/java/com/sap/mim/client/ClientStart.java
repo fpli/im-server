@@ -8,8 +8,8 @@ public class ClientStart {
     public static void main(String[] args) {
 
         LoginMessage loginMessage = new LoginMessage();
-        loginMessage.setMessageType(MessageType.C2S);
-        loginMessage.setC2SMessageType(C2SMessageType.C_2_S_LOGIN);
+        loginMessage.setMessageType(MessageTypeEnum.C2S);
+        loginMessage.setC2SMessageTypeEnum(C2SMessageTypeEnum.C_2_S_LOGIN);
         loginMessage.setMsgId(MessageIdGenerator.getMsgId());
         Account account = new Account();
         account.setAccount("123456");
@@ -21,8 +21,8 @@ public class ClientStart {
 
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setMsgId(MessageIdGenerator.getMsgId());
-        chatMessage.setMessageType(MessageType.C2S);
-        chatMessage.setChatMessageType(ChatMessageType.TEXT_MESSAGE);
+        chatMessage.setMessageType(MessageTypeEnum.C2S);
+        chatMessage.setChatMessageTypeEnum(ChatMessageTypeEnum.TEXT_MESSAGE);
         chatMessage.setSenderId(1001);
         chatMessage.setReceiverId(1002);
         chatMessage.setSendTime("2019年8月21日 下午13:50:23");

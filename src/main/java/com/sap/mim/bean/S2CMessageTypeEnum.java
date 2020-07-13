@@ -3,7 +3,7 @@ package com.sap.mim.bean;
 /**
  * 描述:S2C（消息推送，c2c, g2c, ack）
  */
-public enum S2CMessageType {
+public enum S2CMessageTypeEnum {
 
     S_2_C_LOGIN_RESULT(1, "S_2_C_LOGIN_RESULT"),
     S_2_C_SEARCH_FRIEND(2, "S_2_C_SEARCH_FRIEND")
@@ -12,15 +12,15 @@ public enum S2CMessageType {
 
     private String  description;
 
-    S2CMessageType(Integer s2cMessageType, String description) {
+    S2CMessageTypeEnum(Integer s2cMessageType, String description) {
         this.s2cMessageType = s2cMessageType;
         this.description = description;
     }
 
-    public static S2CMessageType getS2CMessageTypeByType(Integer s2cMessageType){
-        for (S2CMessageType s2CMessageType : values()){
-            if (s2CMessageType.s2cMessageType.equals(s2cMessageType)){
-                return s2CMessageType;
+    public static S2CMessageTypeEnum getS2CMessageTypeByType(Integer s2cMessageType){
+        for (S2CMessageTypeEnum s2CMessageTypeEnum : values()){
+            if (s2CMessageTypeEnum.s2cMessageType.equals(s2cMessageType)){
+                return s2CMessageTypeEnum;
             }
         }
         return null;

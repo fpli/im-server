@@ -12,11 +12,11 @@ public class ChatEntity implements Serializable {
 	public static final int  RECEIVE = 0;//该消息为接收方消息
 	public static final int  SEND = 1;
 
-	private int senderId;// 发送方id
-	private int receiverId;// 接收方id
-	private String sendDate;// 发送日期
-	private int messageType;// 消息类型:文本消息|语音消息|图片消息
-	private String content;// 文本消息文本内容
+	private int 		senderId;	// 发送方id
+	private int 		receiverId;	// 接收方id
+	private String 		sendDate;	// 发送日期
+	private int 		messageType;// 消息类型:文本消息|语音消息|图片消息
+	private String 		content;	// 文本消息文本内容
 
 	public int getSenderId() {
 		return senderId;

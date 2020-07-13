@@ -36,8 +36,8 @@ public class Produce {
             Random random = new Random();
             while (true) {
                 LoginMessage loginMessage = new LoginMessage();
-                loginMessage.setMessageType(MessageType.C2S);
-                loginMessage.setC2SMessageType(C2SMessageType.C_2_S_LOGIN);
+                loginMessage.setMessageType(MessageTypeEnum.C2S);
+                loginMessage.setC2SMessageTypeEnum(C2SMessageTypeEnum.C_2_S_LOGIN);
                 loginMessage.setMsgId(MessageIdGenerator.getMsgId());
                 Account account = new Account();
                 account.setAccount("123456");

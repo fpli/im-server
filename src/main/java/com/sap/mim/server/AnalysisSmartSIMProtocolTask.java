@@ -10,8 +10,8 @@ import java.io.ObjectInputStream;
 
 public class AnalysisSmartSIMProtocolTask implements Runnable {
 
-    private ChannelHandlerContext ctx;
-    private SmartSIMProtocol smartSIMProtocol;
+    private ChannelHandlerContext   ctx;
+    private SmartSIMProtocol        smartSIMProtocol;
 
     public AnalysisSmartSIMProtocolTask(ChannelHandlerContext ctx, SmartSIMProtocol smartSIMProtocol) {
         this.ctx = ctx;

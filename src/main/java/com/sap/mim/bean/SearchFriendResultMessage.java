@@ -8,20 +8,21 @@ import java.util.List;
 public class SearchFriendResultMessage extends MessageModel {
 
     private static final long serialVersionUID = -4838287755627485505L;
-    private S2CMessageType s2CMessageType;
-    private List<Account>  accounts;
+
+    private S2CMessageTypeEnum s2CMessageTypeEnum;
+    private List<Account>   accounts;
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         super.writeExternal(out);
-        out.writeInt(s2CMessageType.getS2cMessageType());
+        out.writeInt(s2CMessageTypeEnum.getS2cMessageType());
         out.writeObject(accounts);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         super.readExternal(in);
-        s2CMessageType = S2CMessageType.getS2CMessageTypeByType(in.readInt());
+        s2CMessageTypeEnum = S2CMessageTypeEnum.getS2CMessageTypeByType(in.readInt());
         accounts = (List<Account>)in.readObject();
     }
 
@@ -36,11 +37,11 @@ public class SearchFriendResultMessage extends MessageModel {
         this.accounts = accounts;
     }
 
-    public S2CMessageType getS2CMessageType() {
-        return s2CMessageType;
+    public S2CMessageTypeEnum getS2CMessageTypeEnum() {
+        return s2CMessageTypeEnum;
     }
 
-    public void setS2CMessageType(S2CMessageType s2CMessageType) {
-        this.s2CMessageType = s2CMessageType;
+    public void setS2CMessageTypeEnum(S2CMessageTypeEnum s2CMessageTypeEnum) {
+        this.s2CMessageTypeEnum = s2CMessageTypeEnum;
     }
 }

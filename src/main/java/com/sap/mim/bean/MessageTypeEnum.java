@@ -1,6 +1,6 @@
 package com.sap.mim.bean;
 
-public enum MessageType {
+public enum MessageTypeEnum {
 
     C2S(1,"C2S"),
     S2C(2,"S2C"),
@@ -26,13 +26,13 @@ public enum MessageType {
         this.description = description;
     }
 
-    MessageType(Integer type, String description){
+    MessageTypeEnum(Integer type, String description){
         this.type        = type;
         this.description = description;
     }
 
-    public static MessageType getMessageTypeById(Integer type){
-        for (MessageType messageType : values()){
+    public static MessageTypeEnum getMessageTypeById(Integer type){
+        for (MessageTypeEnum messageType : values()){
             if (messageType.type.equals(type)){
                 return  messageType;
             }

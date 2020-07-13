@@ -17,15 +17,15 @@ public class SmartSIMProtocol {
     /**
      * 消息的开头的信息标志
      */
-    private int head_data = ConstantValue.HEAD_DATA;
+    private int     head_data = ConstantValue.HEAD_DATA;
     /**
      * 消息的长度
      */
-    private int contentLength;
+    private int     contentLength;
     /**
      * 消息的内容
      */
-    private byte[] content;
+    private byte[]  content;
 
     public int getHead_data() {
         return head_data;

@@ -16,9 +16,9 @@ import java.io.ObjectOutputStream;
  */
 public class Connector {
 
-    private Account account;
+    private Account             account;
 
-    private NioSocketChannel nioSocketChannel;
+    private NioSocketChannel    nioSocketChannel;
 
     public void sendChatMessage(ChatMessage chatMessage) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

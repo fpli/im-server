@@ -3,7 +3,7 @@ package com.sap.mim.bean;
 /**
  * 描述:app 上报消息(登录，心跳检测，聊天(c2c,c2g))
  */
-public enum C2SMessageType {
+public enum C2SMessageTypeEnum {
 
     C_2_S_HEARTBEAT(0, "C_2_S_HEARTBEAT"),
     C_2_S_LOGIN(1, "C_2_S_LOGIN"),
@@ -15,15 +15,15 @@ public enum C2SMessageType {
 
     private String  description;
 
-    C2SMessageType(Integer c2sMessageType, String description) {
+    C2SMessageTypeEnum(Integer c2sMessageType, String description) {
         this.c2sMessageType = c2sMessageType;
         this.description = description;
     }
 
-    public static C2SMessageType getC2SMessageTypeById(Integer c2sMessageType){
-        for (C2SMessageType c2SMessageType : values()){
-            if (c2SMessageType.c2sMessageType.equals(c2sMessageType)){
-                return c2SMessageType;
+    public static C2SMessageTypeEnum getC2SMessageTypeById(Integer c2sMessageType){
+        for (C2SMessageTypeEnum c2SMessageTypeEnum : values()){
+            if (c2SMessageTypeEnum.c2sMessageType.equals(c2sMessageType)){
+                return c2SMessageTypeEnum;
             }
         }
         return null;
