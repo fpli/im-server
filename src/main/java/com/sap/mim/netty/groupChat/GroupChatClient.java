@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class GroupChatClient {
 
-    private String host;
-    private int port;
+    private String  host;
+    private int     port;
 
     public GroupChatClient(String host, int port) {
         this.host = host;
