@@ -56,8 +56,7 @@ public final class FactorialClient {
             ChannelFuture f = b.connect(HOST, PORT).sync();
 
             // Get the handler instance to retrieve the answer.
-            FactorialClientHandler handler =
-                (FactorialClientHandler) f.channel().pipeline().last();
+            FactorialClientHandler handler = (FactorialClientHandler) f.channel().pipeline().last();
 
             // Print out the answer.
             System.err.format("Factorial of %,d is: %,d", COUNT, handler.getFactorial());

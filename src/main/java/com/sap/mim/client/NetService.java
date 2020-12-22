@@ -26,7 +26,7 @@ public class NetService {
 
     private static final InetSocketAddress remoteAddress = new InetSocketAddress("127.0.0.1", 5000);
 
-    private static ChannelPoolMap<InetSocketAddress, SimpleChannelPool> poolMap;
+    private static AbstractChannelPoolMap<InetSocketAddress, FixedChannelPool> poolMap;
 
     private NetService() {
     }
@@ -56,9 +56,9 @@ public class NetService {
                 .option(ChannelOption.TCP_NODELAY, true)//
                 .option(ChannelOption.SO_KEEPALIVE, true);
 
-        poolMap = new AbstractChannelPoolMap<InetSocketAddress, SimpleChannelPool>() {
+        poolMap = new AbstractChannelPoolMap<InetSocketAddress, FixedChannelPool>() {
             @Override
-            protected SimpleChannelPool newPool(InetSocketAddress remoteAddress) {
+            protected FixedChannelPool newPool(InetSocketAddress remoteAddress) {
                 return new FixedChannelPool(strap.remoteAddress(remoteAddress), new NettyChannelPoolHandler(), 2);
             }
         };
@@ -66,7 +66,7 @@ public class NetService {
     }
 
     public void sendMessageModel(MessageModel messageModel) {
-        final SimpleChannelPool pool = poolMap.get(remoteAddress);
+        final FixedChannelPool pool = poolMap.get(remoteAddress);
         Future<Channel> f = pool.acquire();
         f.addListener((FutureListener<Channel>) f1 -> {
             if (f1.isSuccess()) {
