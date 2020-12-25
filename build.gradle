@@ -16,4 +16,5 @@ dependencies {
     compile group: 'io.netty', name: 'netty-all', version: '4.1.29.Final'
     compile group: 'com.google.protobuf', name:'protobuf-java', version: '2.6.1'
     compile group: 'org.apache.commons', name: 'commons-compress', version: '1.19'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
 }
