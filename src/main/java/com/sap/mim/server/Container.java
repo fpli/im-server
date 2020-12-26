@@ -43,7 +43,6 @@ public class Container {
     }
 
     public static void removeSendChatMessage(Long msgId) {
-        ChatMessage chatMessage = sendedChatMessageQueue.remove(msgId);
-        chatMessage = null;
+        sendedChatMessageQueue.remove(msgId);
     }
 }

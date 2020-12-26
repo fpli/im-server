@@ -5,6 +5,9 @@ import com.sap.mim.bean.MessageTypeEnum;
 import com.sap.mim.server.Container;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
@@ -13,6 +16,20 @@ import java.io.ObjectOutputStream;
  * 描述:客户端对应的Channel处理器
  */
 public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<SmartSIMProtocol> {
+
+    private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println(ctx.channel().remoteAddress() + " is connected");
+        channelGroup.add(ctx.channel());
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println(ctx.channel().remoteAddress() + " is disconnected.");
+        System.out.println("channelGroup size:" + channelGroup.size());
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SmartSIMProtocol msg) throws Exception {
@@ -48,5 +65,9 @@ public class ChildNioSocketChannelHandler extends SimpleChannelInboundHandler<Sm
         ctx.channel().writeAndFlush(response);
     }
 
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println(ctx.channel().remoteAddress() + " channelInactive");
+    }
 }
 
