@@ -12,7 +12,7 @@ public class ProduceInitializer extends ChannelInitializer<NioSocketChannel> {
 
     protected void initChannel(NioSocketChannel ch) throws Exception {
         ChannelPipeline pi = ch.pipeline();
-        pi.addLast(new IdleStateHandler(0, 0, 5));
+        pi.addLast(new IdleStateHandler(60, 30, 0));
         // 添加自定义协议的编解码工具
         pi.addLast(new SmartSIMEncoder());
         pi.addLast(new SmartSIMDecoder());

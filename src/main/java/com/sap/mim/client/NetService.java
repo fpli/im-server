@@ -9,9 +9,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.pool.AbstractChannelPoolMap;
-import io.netty.channel.pool.ChannelPoolMap;
 import io.netty.channel.pool.FixedChannelPool;
-import io.netty.channel.pool.SimpleChannelPool;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
@@ -59,7 +57,7 @@ public class NetService {
         poolMap = new AbstractChannelPoolMap<InetSocketAddress, FixedChannelPool>() {
             @Override
             protected FixedChannelPool newPool(InetSocketAddress remoteAddress) {
-                return new FixedChannelPool(strap.remoteAddress(remoteAddress), new NettyChannelPoolHandler(), 2);
+                return new FixedChannelPool(strap.remoteAddress(remoteAddress), new NettyChannelPoolHandler(), 1);
             }
         };
 
