@@ -17,12 +17,12 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        channel = ctx.channel();
+        //channel = ctx.channel();
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-       super.handlerAdded(ctx);
+        channel = ctx.channel();
     }
 
     @Override
