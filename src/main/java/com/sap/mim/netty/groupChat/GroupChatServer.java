@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.concurrent.EventExecutorGroup;
 
 public class GroupChatServer {
 
@@ -15,6 +16,8 @@ public class GroupChatServer {
     public GroupChatServer(int port) {
         this.port = port;
     }
+
+    static final EventExecutorGroup eventExecutorGroup = new DefaultEventLoopGroup(2);
 
     // 编写run方法，处理客户端请求
     public void run() throws Exception {
@@ -36,6 +39,8 @@ public class GroupChatServer {
                             pipeline.addLast(new StringDecoder());
                             pipeline.addLast(new StringEncoder());
                             pipeline.addLast(new GroupChatServerHandler());
+                            // add task to eventExecutorGroup
+                            //pipeline.addLast(eventExecutorGroup, new GroupChatServerHandler());
                         }
                     });//
 

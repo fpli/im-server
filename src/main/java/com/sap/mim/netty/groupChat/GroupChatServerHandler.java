@@ -5,10 +5,16 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {
+    // add task to another thread
+    static final EventExecutorGroup eventExecutorGroup = new DefaultEventExecutorGroup(16);
 
     // 定义一个channel组，管理所有的channel
     // GlobalEventExecutor.INSTANCE是一个全局事件执行器，是一个单例
@@ -47,12 +53,22 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Channel channel = ctx.channel();
-
+        System.out.println(Thread.currentThread().getName());
         channelGroup.forEach((ch) -> {
             if (ch != channel) {
                 ch.writeAndFlush("[客户]" + channel.remoteAddress() + "发送了消息:" + msg + "\n");
             } else {
                 channel.writeAndFlush("[自己]发送了消息" + msg + "\n");
+            }
+        });
+
+        eventExecutorGroup.submit(()->{
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(Thread.currentThread().getName());
+                ctx.writeAndFlush("dfdfdff");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
     }
