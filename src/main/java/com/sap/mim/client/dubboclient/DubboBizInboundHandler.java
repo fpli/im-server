@@ -1,6 +1,7 @@
 package com.sap.mim.client.dubboclient;
 
 import com.sap.mim.net.SmartSIMProtocol;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -12,11 +13,11 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
 
     private Object response;
 
-    private ChannelHandlerContext ctx;
+    private Channel channel;
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        this.ctx = ctx;
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        channel = ctx.channel();
     }
 
     @Override
@@ -33,7 +34,7 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
 
     @Override
     public synchronized Object call() throws Exception {
-        this.ctx.writeAndFlush(request);
+        channel.writeAndFlush(request);
         wait();
         return response;
     }
