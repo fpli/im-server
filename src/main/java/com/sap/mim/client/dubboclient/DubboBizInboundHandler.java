@@ -31,7 +31,6 @@ public class DubboBizInboundHandler extends SimpleChannelInboundHandler<SmartSIM
         notify();
     }
 
-
     @Override
     public synchronized Object call() throws Exception {
         channel.writeAndFlush(request);
