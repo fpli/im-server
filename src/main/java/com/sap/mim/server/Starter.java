@@ -13,25 +13,24 @@ import io.netty.handler.logging.LoggingHandler;
 public class Starter {
 
     public static void main(String[] args) throws Exception {
-        // 配置NIO线程组
+        // Configure the server.
         EventLoopGroup  bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup  workerGroup = new NioEventLoopGroup();
         try {
-            // 服务器辅助启动类配置
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-                    .option(ChannelOption.SO_BACKLOG, 128)// 设置线程队列等待连接的个数
+                    .option(ChannelOption.SO_BACKLOG, 128)
                     .channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.DEBUG))
+                    .handler(new LoggingHandler(LogLevel.INFO))
                     .childOption(ChannelOption.TCP_NODELAY, true)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true)//设置保持活动连接状态
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChildChannelInitializer());
-            // 绑定端口 同步等待绑定成功
-            ChannelFuture f = b.bind(5000).sync(); // (7)
-            // 等到服务端监听端口关闭
+            // Start the server.
+            ChannelFuture f = b.bind(5000).sync();
+            // Wait until the server socket is closed.
             f.channel().closeFuture().sync();
         } finally {
-            // 优雅释放线程资源
+            // Shut down all event loops to terminate all threads.
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
